@@ -1,0 +1,79 @@
+<button (click)="intit()">intit</button><button (click)="del(1)">del1</button><button (click)="del(2)">del2</button>
+<form [formGroup]="entrepriseForm" (ngSubmit)="onSubmit()">
+  
+	<label>Name : </label>
+	<input type="text" formControlName="nom">
+	<div style="color : red;" *ngIf="entrepriseForm.get('nom').hasError('required') && entrepriseForm.get('nom').touched">
+		il faut un nom
+	</div>
+	<br><br>
+
+	<label>Numero De telephone : </label>
+	<input type="text" formControlName="numeroTelephone">
+	<div style="color : red;" *ngIf="entrepriseForm.get('numeroTelephone').hasError('required') && entrepriseForm.get('numeroTelephone').touched">
+		il faut un numero De telephone
+	</div>
+	<div style="color : red;" *ngIf="entrepriseForm.get('numeroTelephone').hasError('pattern') && entrepriseForm.get('numeroTelephone').touched">
+		numero De telephone non valide
+	</div>
+	<br><br>
+
+	<label>Email : </label>
+	<input type="email" formControlName="email">
+	<div style="color : red;" *ngIf="entrepriseForm.get('email').hasError('required') && entrepriseForm.get('email').touched">
+		il faut une adresse mail
+	</div>
+	<br><br>
+
+	<label>Nom du responsable : </label>
+	<input type="text" formControlName="nomResponsable">
+	<div style="color : red;" *ngIf="entrepriseForm.get('nomResponsable').hasError('required') && entrepriseForm.get('nomResponsable').touched">
+		il faut un nom de responsable
+	</div>
+	<br><br>
+
+	<label>Numero banque Carrefour Ets : </label>
+	<input type="text" formControlName="numeroBanqueCarrefourEts">
+	<div style="color : red;" *ngIf="entrepriseForm.get('numeroBanqueCarrefourEts').hasError('required') && entrepriseForm.get('numeroBanqueCarrefourEts').touched">
+		il faut numero de banque carrefour Ets
+	</div>
+	<div style="color : red;" *ngIf="entrepriseForm.get('numeroBanqueCarrefourEts').hasError('pattern') && entrepriseForm.get('numeroBanqueCarrefourEts').touched">
+		numero de banque carrefour Ets non valide
+	</div>
+	<br><br>
+
+	<div formGroupName="adresse">	
+		<label>Route : </label>
+		<input type="text" formControlName="route">
+		<div style="color : red;" *ngIf="entrepriseForm.get('adresse.route').hasError('required') && entrepriseForm.get('adresse.route').touched">
+			il faut une route
+		</div>
+		<br><br>
+
+		<label>Numero : </label>
+		<input type="text" formControlName="numero">
+		<div style="color : red;" *ngIf="entrepriseForm.get('adresse.numero').hasError('required') && entrepriseForm.get('adresse.numero').touched">
+			il faut un numero
+		</div>
+		<br><br>
+
+		<label>Code postal : </label>
+		<input type="text" formControlName="codePostal">
+		<div style="color : red;" *ngIf="entrepriseForm.get('adresse.codePostal').hasError('required') && entrepriseForm.get('adresse.codePostal').touched">
+			il faut un code postal
+		</div>
+		<div style="color : red;" *ngIf="entrepriseForm.get('adresse.codePostal').hasError('pattern') && entrepriseForm.get('adresse.codePostal').touched">
+			code postal non valide
+		</div>
+		<br><br>
+
+		<label>Localite : </label>
+		<input type="text" formControlName="localite">
+		<div style="color : red;" *ngIf="entrepriseForm.get('adresse.localite').hasError('required') && entrepriseForm.get('adresse.localite').touched">
+			il faut une localite
+		</div>
+		<br><br>
+	</div>
+
+	<button type="submit" [disabled]="entrepriseForm.hasError()">Submit</button>
+</form>
