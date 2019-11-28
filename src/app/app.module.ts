@@ -6,11 +6,13 @@ import { AppComponent } from './app.component';
 import { InscriptionEntrepriseComponent } from './inscription-entreprise/inscription-entreprise.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { AcceuilComponent } from './acceuil/acceuil.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    InscriptionEntrepriseComponent
+    InscriptionEntrepriseComponent,
+    AcceuilComponent
   ],
   imports: [
     BrowserModule,

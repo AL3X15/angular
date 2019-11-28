@@ -23,6 +23,9 @@
 	<div style="color : red;" *ngIf="entrepriseForm.get('email').hasError('required') && entrepriseForm.get('email').touched">
 		il faut une adresse mail
 	</div>
+	<div style="color : red;" *ngIf="entrepriseForm.get('email').hasError('pattern') && entrepriseForm.get('email').touched">
+		adresse mail non valide
+	</div>
 	<br><br>
 
 	<label>Nom du responsable : </label>
@@ -75,5 +78,5 @@
 		<br><br>
 	</div>
 
-	<button type="submit" [disabled]="entrepriseForm.hasError()">Submit</button>
+	<button type="submit" [disabled]="!entrepriseForm.valid">Submit</button>
 </form>

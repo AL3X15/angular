@@ -1,15 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
 import { Entreprise } from '../model/Entreprise';
 import { Adress } from '../model/Adress';
-import { FormControl, NgForm } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { EntrepriseService } from '../service/entreprise.service';
-import { isNull } from 'util';
 
 
 @Component({
@@ -19,18 +14,18 @@ import { isNull } from 'util';
 })
 export class InscriptionEntrepriseComponent implements OnInit {
 
-  	constructor(private http : HttpClient, private formBuilder: FormBuilder, private serviceEnt : EntrepriseService) {
-		//serviceEnt.get(this.selectedEnterprise.id).subscribe(ent =>  entreprise = ent);
-		serviceEnt.get(1).subscribe(
-			ent => this.entreprise = ent,
-			() => console.log("error"),
-			() => this.créationForm() 
-		);
-
+  	constructor(private formBuilder: FormBuilder, private serviceEnt : EntrepriseService) {
+		if(this.selectedEnterpriseId != undefined){
+			serviceEnt.get(this.selectedEnterpriseId).subscribe(
+				ent => this.entreprise = ent,
+				() => console.log("error"),
+				() => this.RemplissageForm() );
+			this.estCréation = false;
+		}
 		this.entrepriseForm = this.formBuilder.group({
 			nom : ['', Validators.required],
 			numeroTelephone : ['', Validators.compose([Validators.required, Validators.pattern("0\\d{3}(\\d{2}){3}")])],
-			email : ['', Validators.compose([Validators.required, Validators.email])],
+			email : ['', Validators.compose([Validators.required, Validators.pattern(".+@.+\..+")])],
 			nomResponsable : ['', Validators.required],
 			numeroBanqueCarrefourEts : ['', Validators.compose([Validators.required, Validators.pattern("[01]\\d{9}")])],
 			adresse : this.formBuilder.group({
@@ -44,10 +39,10 @@ export class InscriptionEntrepriseComponent implements OnInit {
 
   	ngOnInit() {
 	}
-	estCréation : boolean = false;
+	estCréation : boolean = true;
 	entrepriseForm : FormGroup;
 	entreprise : Entreprise;
-	//@Input() selectedEnterprise : Entreprise;
+	@Input() selectedEnterpriseId : number;
 	
 	onSubmit(){
 		if(this.estCréation)
@@ -56,13 +51,8 @@ export class InscriptionEntrepriseComponent implements OnInit {
 			this.serviceEnt.uptdate(this.entrepriseForm.value, this.entreprise).subscribe();
 	}
 
-	créationForm(){
-		if(isNull(this.entreprise)){
-			this.estCréation = true;
-			this.entreprise = new Entreprise();
-			this.entreprise.adresse = new Adress();
-		}
-
+	RemplissageForm(){
+		
 		this.entrepriseForm.setValue({
 			nom : this.entreprise.nom,
 			numeroTelephone : this.entreprise.numeroTelephone,
