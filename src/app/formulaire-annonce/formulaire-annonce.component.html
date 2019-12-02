@@ -1,0 +1,56 @@
+<form [formGroup]="annonceForm" (ngSubmit)="onSubmit()">
+  
+	<label>Poste : </label>
+	<input type="text" formControlName="poste">
+	<div style="color : red;" *ngIf="annonceForm.get('poste').hasError('required') && annonceForm.get('poste').touched">
+		il faut un poste
+	</div>
+	<br><br>
+
+	<label>Date De début : </label>
+	<input type="date" formControlName="dateDebut">
+	<div style="color : red;" *ngIf="annonceForm.get('dateDebut').hasError('required') && annonceForm.get('dateDebut').touched">
+		il faut une date de début
+	</div>
+	<br><br>
+
+	<label>Date De fin : </label>
+	<input type="date" formControlName="dateFin">
+	<div style="color : red;" *ngIf="annonceForm.get('dateFin').hasError('required') && annonceForm.get('dateFin').touched">
+		il faut une date de fin
+	</div>
+	<br><br>
+
+	<label>Paye : </label>
+	<input type="number" formControlName="paye">
+	<div style="color : red;" *ngIf="annonceForm.get('paye').hasError('required') && annonceForm.get('paye').touched">
+		il faut une paye
+	</div>
+	<br><br>
+
+	<label>Région : </label>
+	<select formControlName="region">
+		<div *ngFor="let region of regions">
+			<option value="{{region}}">{{region}}</option>
+		</div>
+	</select>
+	<br><br>
+
+	<label>Langue : </label>
+	<select formControlName="langue">
+		<div *ngFor="let langue of langues">
+			<option value="{{langue}}">{{langue}}</option>
+		</div>
+	</select>
+	<br><br>
+
+	<label>Secteur : </label>
+	<select formControlName="secteur">
+		<div *ngFor="let secteur of secteurs">
+			<option value="{{secteur}}">{{secteur}}</option>
+		</div>
+	</select>
+	<br><br>
+
+	<button type="submit" [disabled]="!annonceForm.valid">Submit</button>
+</form>

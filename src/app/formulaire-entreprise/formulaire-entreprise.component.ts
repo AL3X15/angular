@@ -1,20 +1,17 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Entreprise } from '../model/Entreprise';
 import { Adress } from '../model/Adress';
-import { FormGroup } from '@angular/forms';
-import { FormBuilder } from '@angular/forms';
-import { Validators } from '@angular/forms';
+import { Entreprise } from '../model/Entreprise';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { EntrepriseService } from '../service/entreprise.service';
 
-
 @Component({
-  selector: 'app-inscription-entreprise',
-  templateUrl: './inscription-entreprise.component.html',
-  styleUrls: ['./inscription-entreprise.component.css']
+  selector: 'app-formulaire-entreprise',
+  templateUrl: './formulaire-entreprise.component.html',
+  styleUrls: ['./formulaire-entreprise.component.css']
 })
-export class InscriptionEntrepriseComponent implements OnInit {
+export class FormulaireEntrepriseComponent implements OnInit {
 
-  	constructor(private formBuilder: FormBuilder, private serviceEnt : EntrepriseService) {
+	constructor(private formBuilder: FormBuilder, private serviceEnt : EntrepriseService) {
 		if(this.selectedEnterpriseId != undefined){
 			serviceEnt.get(this.selectedEnterpriseId).subscribe(
 				ent => this.entreprise = ent,
