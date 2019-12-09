@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Annonce } from '../model/Annonce';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { AnnonceService } from '../service/annonce.service';
-import { Tag } from '../model/Tag';
-import { TagService } from '../service/tag.service';
+
 
 @Component({
   selector: 'app-formulaire-annonce',
@@ -11,7 +8,7 @@ import { TagService } from '../service/tag.service';
   styleUrls: ['./formulaire-annonce.component.css']
 })
 export class FormulaireAnnonceComponent implements OnInit {
-
+/*
 	constructor(private formBuilder: FormBuilder, private serviceAnnonce : AnnonceService, private serviceTag : TagService) {
 		if(this.selectedEnterpriseId != undefined && this.selectedAnnonceId != undefined){
 			serviceAnnonce.get(this.selectedAnnonceId, this.selectedEnterpriseId).subscribe(
@@ -32,9 +29,9 @@ export class FormulaireAnnonceComponent implements OnInit {
 			secteur : [''],
 		}); 
 	}
-
+*/
   	ngOnInit() {
-	}
+	}/*
 	estCréation : boolean = true;
 	annonceForm : FormGroup;
 	annonce : Annonce;
@@ -84,5 +81,5 @@ export class FormulaireAnnonceComponent implements OnInit {
 					break;
 			}
 		}
-	}
+	}*/
 }

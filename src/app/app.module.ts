@@ -9,6 +9,7 @@ import { AcceuilComponent } from './acceuil/acceuil.component';
 import { FormulaireEntrepriseComponent } from './formulaire-entreprise/formulaire-entreprise.component';
 import { FormulaireAnnonceComponent } from './formulaire-annonce/formulaire-annonce.component';
 import { MenuComponent } from './menu/menu.component';
+import { ApiModule } from './api/api.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { MenuComponent } from './menu/menu.component';
 	AppRoutingModule,
 	HttpClientModule,
 	ReactiveFormsModule,
-	NoopAnimationsModule
+	NoopAnimationsModule,
+	ApiModule.forRoot({rootUrl : "https://localhost:5001"})
   ],
   providers: [],
   bootstrap: [AppComponent]
