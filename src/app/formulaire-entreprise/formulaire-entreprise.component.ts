@@ -1,9 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { EnrepriseService } from '../api/services';
-import { Entreprise } from '../api/models';
+import { Entreprise, EntrepriseDTO } from '../api/models';
 import { EntrepriseModel } from '../model/EntrepriseModel';
 import { AdresseModel } from '../model/AdresseModel';
+import { EntrepriseService } from '../api/services';
+import { UserModel } from '../model/UserModel';
+import { LocaliteModel } from '../model/LocaliteModel';
 
 @Component({
   selector: 'app-formulaire-entreprise',
@@ -12,9 +14,9 @@ import { AdresseModel } from '../model/AdresseModel';
 })
 export class FormulaireEntrepriseComponent implements OnInit {
 
-	constructor(private formBuilder: FormBuilder, private serviceEnt : EnrepriseService) {
+	constructor(private formBuilder: FormBuilder, private serviceEnt : EntrepriseService) {
 		if(this.selectedEnterpriseId != undefined){
-			serviceEnt.getEnrepriseId(this.selectedEnterpriseId).subscribe(
+			serviceEnt.getEntrepriseId(this.selectedEnterpriseId).subscribe(
 				ent => this.entreprise = ent,
 				() => console.log("error"),
 				() => this.RemplissageForm() );
@@ -39,38 +41,39 @@ export class FormulaireEntrepriseComponent implements OnInit {
 	}
 	estCréation : boolean = true;
 	entrepriseForm : FormGroup;
-	entreprise : Entreprise;
+	entreprise : EntrepriseDTO;
 	@Input() selectedEnterpriseId : number;
 	
 	onSubmit(){
 		//TOOD conserver estPremium d'une entreprise déja existante
 		this.entreprise = this.entrepriseForm.value;
+		
 		if(this.estCréation){
 			this.entreprise.estPremium = false;
-			this.serviceEnt.postEnreprise(this.entreprise).subscribe();
+			this.serviceEnt.postEntreprise(this.entreprise).subscribe();
 
 		}else{
-			this.serviceEnt.putEnreprise(this.entreprise).subscribe();
+			this.serviceEnt.putEntreprise(this.entreprise).subscribe();
 		}
 	}
 
 	RemplissageForm(){
 		
 		this.entrepriseForm.setValue({
-			nom : this.entreprise.nom,
-			numeroTelephone : this.entreprise.numeroTelephone,
-			email : this.entreprise.email,
+			nom : this.entreprise.user.nom,
+			numeroTelephone : this.entreprise.user.numeroTelephone,
+			email : this.entreprise.user.email,
 			nomResponsable : this.entreprise.nomResponsable,
 			numeroBanqueCarrefourEts : this.entreprise.numeroBanqueCarrefourEts,
 			adresse : {
-				route : this.entreprise.adresse.route,
+				route : this.entreprise.adresse.rue,
 				numero : this.entreprise.adresse.numero,
-				codePostal : this.entreprise.adresse.codePostal,
-				localite : this.entreprise.adresse.localite}});
+				codePostal : this.entreprise.adresse.localite.codePostal,
+				localite : this.entreprise.adresse.localite.nom}});
 	}
 
 	del(id : number){
-		this.serviceEnt.deleteEnrepriseId(id).subscribe();
+		this.serviceEnt.deleteEntrepriseId(id).subscribe();
 	}
 
 	intit(){
@@ -79,35 +82,39 @@ export class FormulaireEntrepriseComponent implements OnInit {
 	}
 	intit1(){
 		let e = new EntrepriseModel;
-		e.id = 1;
-		e.nom = "jean michel Test Enterprise";
-		e.numeroTelephone =  "0498246521";
-		e.email = "jmt@e.com";
+		e.user = new UserModel();
+		e.user.nom = "jean michel Test Enterprise";
+		e.user.motDePasse="test";
+		e.user.numeroTelephone =  "0498246521";
+		e.user.email = "jmtcjj@e.com";
 		e.nomResponsable = "jmt";
 		e.numeroBanqueCarrefourEts = "0555555555";
 		e.estPremium = false;
 		e.adresse = new AdresseModel();
-		e.adresse.route = "route";
-		e.adresse.numero = "2a"
-		e.adresse.codePostal = "5555";
-		e.adresse.localite = "loc";
-		this.serviceEnt.postEnreprise(e).subscribe();
+		e.adresse.rue = "route";
+		e.adresse.numero = "2a";
+		e.adresse.localite = new LocaliteModel();
+		e.adresse.localite.codePostal = "1000";
+		e.adresse.localite.nom = "localite";
+		this.serviceEnt.postEntreprise(e).subscribe();
 	}
 	intit2(){
 		let e = new EntrepriseModel();
-		e.id = 2;
-		e.nom = "jean michel Test junior Enterprise";
-		e.numeroTelephone =  "0498246521";
-		e.email = "jmt@e.com";
+		e.user = new UserModel();
+		e.user.nom = "jean michel Test junior Enterprise";
+		e.user.numeroTelephone =  "0498246521";
+		e.user.motDePasse="test";
+		e.user.email = "jmtcj@e.com";
 		e.nomResponsable = "jmt";
 		e.numeroBanqueCarrefourEts = "0555555555";
 		e.estPremium = false;
 		e.adresse = new AdresseModel();
-		e.adresse.route = "route";
+		e.adresse.rue = "route";
 		e.adresse.numero = "2a"
-		e.adresse.codePostal = "5555";
-		e.adresse.localite = "loc";
-		this.serviceEnt.postEnreprise(e).subscribe();
+		e.adresse.localite = new LocaliteModel();
+		e.adresse.localite.codePostal = "1000";
+		e.adresse.localite.nom = "localite";
+		this.serviceEnt.postEntreprise(e).subscribe();
 	}
 
 }

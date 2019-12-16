@@ -25,7 +25,7 @@ import { ApiModule } from './api/api.module';
 	HttpClientModule,
 	ReactiveFormsModule,
 	NoopAnimationsModule,
-	ApiModule.forRoot({rootUrl : "https://localhost:5001"})
+	ApiModule.forRoot({rootUrl : "http://localhost:5000"})
   ],
   providers: [],
   bootstrap: [AppComponent]

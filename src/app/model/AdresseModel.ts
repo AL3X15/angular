@@ -1,10 +1,12 @@
 import { Adresse } from '../api/models/adresse';
+import { LocaliteDTO } from '../api/models';
+import { LocaliteModel } from './LocaliteModel';
 
 export class AdresseModel implements Adresse{
-	id?: number;	route: string;
+	id?: number;	
+	rue: string;
 	numero: string;
-	codePostal: string;
-	localite: string;
+	localite: LocaliteModel;
 	public AdresseModel(){}
 
 }

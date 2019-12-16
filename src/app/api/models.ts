@@ -1,2 +1,16 @@
+export { LocaliteDTO } from './models/localite-dto';
+export { AdresseDTO } from './models/adresse-dto';
+export { UserDTO } from './models/user-dto';
+export { EntrepriseDTO } from './models/entreprise-dto';
+export { EntrepriseDTOPagedResult } from './models/entreprise-dtopaged-result';
+export { Localite } from './models/localite';
+export { Administrateur } from './models/administrateur';
+export { User } from './models/user';
+export { TagAnnonce } from './models/tag-annonce';
+export { Tag } from './models/tag';
+export { TagEtudiant } from './models/tag-etudiant';
+export { Etudiant } from './models/etudiant';
+export { Postulation } from './models/postulation';
+export { Annonce } from './models/annonce';
 export { Adresse } from './models/adresse';
 export { Entreprise } from './models/entreprise';

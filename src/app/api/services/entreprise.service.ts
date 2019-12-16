@@ -7,16 +7,18 @@ import { StrictHttpResponse as __StrictHttpResponse } from '../strict-http-respo
 import { Observable as __Observable } from 'rxjs';
 import { map as __map, filter as __filter } from 'rxjs/operators';
 
+import { EntrepriseDTOPagedResult } from '../models/entreprise-dtopaged-result';
+import { EntrepriseDTO } from '../models/entreprise-dto';
 import { Entreprise } from '../models/entreprise';
 @Injectable({
   providedIn: 'root',
 })
-class EnrepriseService extends __BaseService {
-  static readonly getEnreprisePath = '/Enreprise';
-  static readonly postEnreprisePath = '/Enreprise';
-  static readonly putEnreprisePath = '/Enreprise';
-  static readonly getEnrepriseIdPath = '/Enreprise/{id}';
-  static readonly deleteEnrepriseIdPath = '/Enreprise/{id}';
+class EntrepriseService extends __BaseService {
+  static readonly getPageLignePath = '/page/{ligne}';
+  static readonly getEntrepriseIdPath = '/Entreprise/{id}';
+  static readonly deleteEntrepriseIdPath = '/Entreprise/{id}';
+  static readonly postEntreprisePath = '/Entreprise';
+  static readonly putEntreprisePath = '/Entreprise';
 
   constructor(
     config: __Configuration,
@@ -26,122 +28,17 @@ class EnrepriseService extends __BaseService {
   }
 
   /**
+   * @param ligne undefined
    * @return Success
    */
-  getEnrepriseResponse(): __Observable<__StrictHttpResponse<Array<Entreprise>>> {
-    let __params = this.newParams();
-    let __headers = new HttpHeaders();
-    let __body: any = null;
-    let req = new HttpRequest<any>(
-      'GET',
-      this.rootUrl + `/Enreprise`,
-      __body,
-      {
-        headers: __headers,
-        params: __params,
-        responseType: 'json'
-      });
-
-    return this.http.request<any>(req).pipe(
-      __filter(_r => _r instanceof HttpResponse),
-      __map((_r) => {
-        return _r as __StrictHttpResponse<Array<Entreprise>>;
-      })
-    );
-  }
-  /**
-   * @return Success
-   */
-  getEnreprise(): __Observable<Array<Entreprise>> {
-    return this.getEnrepriseResponse().pipe(
-      __map(_r => _r.body as Array<Entreprise>)
-    );
-  }
-
-  /**
-   * @param body undefined
-   * @return Success
-   */
-  postEnrepriseResponse(body?: Entreprise): __Observable<__StrictHttpResponse<Entreprise>> {
-    let __params = this.newParams();
-    let __headers = new HttpHeaders();
-    let __body: any = null;
-    __body = body;
-    let req = new HttpRequest<any>(
-      'POST',
-      this.rootUrl + `/Enreprise`,
-      __body,
-      {
-        headers: __headers,
-        params: __params,
-        responseType: 'json'
-      });
-
-    return this.http.request<any>(req).pipe(
-      __filter(_r => _r instanceof HttpResponse),
-      __map((_r) => {
-        return _r as __StrictHttpResponse<Entreprise>;
-      })
-    );
-  }
-  /**
-   * @param body undefined
-   * @return Success
-   */
-  postEnreprise(body?: Entreprise): __Observable<Entreprise> {
-    return this.postEnrepriseResponse(body).pipe(
-      __map(_r => _r.body as Entreprise)
-    );
-  }
-
-  /**
-   * @param body undefined
-   * @return Success
-   */
-  putEnrepriseResponse(body?: Entreprise): __Observable<__StrictHttpResponse<Entreprise>> {
-    let __params = this.newParams();
-    let __headers = new HttpHeaders();
-    let __body: any = null;
-    __body = body;
-    let req = new HttpRequest<any>(
-      'PUT',
-      this.rootUrl + `/Enreprise`,
-      __body,
-      {
-        headers: __headers,
-        params: __params,
-        responseType: 'json'
-      });
-
-    return this.http.request<any>(req).pipe(
-      __filter(_r => _r instanceof HttpResponse),
-      __map((_r) => {
-        return _r as __StrictHttpResponse<Entreprise>;
-      })
-    );
-  }
-  /**
-   * @param body undefined
-   * @return Success
-   */
-  putEnreprise(body?: Entreprise): __Observable<Entreprise> {
-    return this.putEnrepriseResponse(body).pipe(
-      __map(_r => _r.body as Entreprise)
-    );
-  }
-
-  /**
-   * @param id undefined
-   * @return Success
-   */
-  getEnrepriseIdResponse(id: number): __Observable<__StrictHttpResponse<Entreprise>> {
+  getPageLigneResponse(ligne: number): __Observable<__StrictHttpResponse<EntrepriseDTOPagedResult>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/Enreprise/${id}`,
+      this.rootUrl + `/page/${ligne}`,
       __body,
       {
         headers: __headers,
@@ -152,7 +49,43 @@ class EnrepriseService extends __BaseService {
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<Entreprise>;
+        return _r as __StrictHttpResponse<EntrepriseDTOPagedResult>;
+      })
+    );
+  }
+  /**
+   * @param ligne undefined
+   * @return Success
+   */
+  getPageLigne(ligne: number): __Observable<EntrepriseDTOPagedResult> {
+    return this.getPageLigneResponse(ligne).pipe(
+      __map(_r => _r.body as EntrepriseDTOPagedResult)
+    );
+  }
+
+  /**
+   * @param id undefined
+   * @return Success
+   */
+  getEntrepriseIdResponse(id: number): __Observable<__StrictHttpResponse<EntrepriseDTO>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+    let req = new HttpRequest<any>(
+      'GET',
+      this.rootUrl + `/Entreprise/${id}`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<EntrepriseDTO>;
       })
     );
   }
@@ -160,23 +93,23 @@ class EnrepriseService extends __BaseService {
    * @param id undefined
    * @return Success
    */
-  getEnrepriseId(id: number): __Observable<Entreprise> {
-    return this.getEnrepriseIdResponse(id).pipe(
-      __map(_r => _r.body as Entreprise)
+  getEntrepriseId(id: number): __Observable<EntrepriseDTO> {
+    return this.getEntrepriseIdResponse(id).pipe(
+      __map(_r => _r.body as EntrepriseDTO)
     );
   }
 
   /**
    * @param id undefined
    */
-  deleteEnrepriseIdResponse(id: number): __Observable<__StrictHttpResponse<null>> {
+  deleteEntrepriseIdResponse(id: number): __Observable<__StrictHttpResponse<null>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
 
     let req = new HttpRequest<any>(
       'DELETE',
-      this.rootUrl + `/Enreprise/${id}`,
+      this.rootUrl + `/Entreprise/${id}`,
       __body,
       {
         headers: __headers,
@@ -194,14 +127,84 @@ class EnrepriseService extends __BaseService {
   /**
    * @param id undefined
    */
-  deleteEnrepriseId(id: number): __Observable<null> {
-    return this.deleteEnrepriseIdResponse(id).pipe(
+  deleteEntrepriseId(id: number): __Observable<null> {
+    return this.deleteEntrepriseIdResponse(id).pipe(
+      __map(_r => _r.body as null)
+    );
+  }
+
+  /**
+   * @param body undefined
+   * @return Success
+   */
+  postEntrepriseResponse(body?: EntrepriseDTO): __Observable<__StrictHttpResponse<EntrepriseDTO>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+    __body = body;
+    let req = new HttpRequest<any>(
+      'POST',
+      this.rootUrl + `/Entreprise`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<EntrepriseDTO>;
+      })
+    );
+  }
+  /**
+   * @param body undefined
+   * @return Success
+   */
+  postEntreprise(body?: EntrepriseDTO): __Observable<EntrepriseDTO> {
+    return this.postEntrepriseResponse(body).pipe(
+      __map(_r => _r.body as EntrepriseDTO)
+    );
+  }
+
+  /**
+   * @param body undefined
+   */
+  putEntrepriseResponse(body?: Entreprise): __Observable<__StrictHttpResponse<null>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+    __body = body;
+    let req = new HttpRequest<any>(
+      'PUT',
+      this.rootUrl + `/Entreprise`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<null>;
+      })
+    );
+  }
+  /**
+   * @param body undefined
+   */
+  putEntreprise(body?: Entreprise): __Observable<null> {
+    return this.putEntrepriseResponse(body).pipe(
       __map(_r => _r.body as null)
     );
   }
 }
 
-module EnrepriseService {
+module EntrepriseService {
 }
 
-export { EnrepriseService }
+export { EntrepriseService }
