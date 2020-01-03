@@ -3,21 +3,21 @@ import { Routes, RouterModule } from '@angular/router';
 import { AcceuilComponent } from './acceuil/acceuil.component';
 import { FormulaireEntrepriseComponent } from './formulaire-entreprise/formulaire-entreprise.component';
 import { FormulaireAnnonceComponent } from './formulaire-annonce/formulaire-annonce.component';
+import { AuthorisationGuard } from './guard/authorisation.guard';
 
 
 const routes: Routes = [
 	{
 		path: "acceuil",
 		component: AcceuilComponent,
-		data: { title: "Details"}
 	},{
 		path: "entreprise",
 		component: FormulaireEntrepriseComponent,
-		data: {title : "Search"}
+		canActivate: [AuthorisationGuard],
 	},{
 		path: "annonce",
 		component: FormulaireAnnonceComponent,
-		data: {title : "Search"}
+		canActivate: [AuthorisationGuard],
 	},{
 		path: "",
 		redirectTo: "/acceuil",

@@ -1,11 +1,11 @@
 import { UserDTO } from '../api/models';
 
 export class UserModel implements UserDTO {
-    id: number;
+    id: string;
     email: string;
     motDePasse: string;
     nom: string;
-    numeroTelephone: string;
+    phoneNumber: string;
     public UserModel(){}
   }
   

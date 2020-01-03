@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UtilisateurService } from './service/utilisateur.service';
 
 @Component({
   selector: 'app-root',
@@ -7,8 +8,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 	title = 'smartcity';
-/*	constructor(private userService : UserService){
-		userService.estConnecte.subscribe(est => this.estConnecte = est);
+	constructor(private userService : UtilisateurService){
+		userService.estAdmin.subscribe(est => this.estAdmin = est);
+		userService.estEntreprise.subscribe(est => this.estEntreprise = est);
 	}
-	estConnecte : boolean;*/
+	estAdmin : boolean;
+	estEntreprise : boolean;
 }

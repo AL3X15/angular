@@ -1,8 +1,10 @@
 /* tslint:disable */
 export interface UserDTO {
-  id?: number;
-  email: string;
-  motDePasse: string;
+  id?: string;
   nom: string;
-  numeroTelephone: string;
+  nbSignalement?: number;
+  email: string;
+  password?: string;
+  confirmationPassword?: string;
+  phoneNumber: string;
 }

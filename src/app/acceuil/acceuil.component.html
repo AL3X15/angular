@@ -1,3 +1,23 @@
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <label>Email : </label>
+    <input type="email" formControlName="UserName">
+    <div style="color : red;" *ngIf="loginForm.get('UserName').hasError('required') && loginForm.get('UserName').touched">
+        il faut une adresse mail
+    </div>
+    <div style="color : red;" *ngIf="loginForm.get('UserName').hasError('pattern') && loginForm.get('UserName').touched">
+        adresse mail non valide
+    </div>
+    <br><br>
 
+    <label>Nom du responsable : </label>
+    <input type="text" formControlName="Password">
+    <div style="color : red;" *ngIf="loginForm.get('Password').hasError('required') && loginForm.get('Password').touched">
+        il faut un mot de passe
+    </div>
+    <br><br>
+    <button type="submit" [disabled]="!loginForm.valid">Submit</button>
+</form>
 
 <button routerLink="/entreprise">S'inscrire</button>
+
+<button (click)="test()">test</button>

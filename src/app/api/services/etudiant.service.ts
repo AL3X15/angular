@@ -7,17 +7,17 @@ import { StrictHttpResponse as __StrictHttpResponse } from '../strict-http-respo
 import { Observable as __Observable } from 'rxjs';
 import { map as __map, filter as __filter } from 'rxjs/operators';
 
-import { EntrepriseDTOPagedResult } from '../models/entreprise-dtopaged-result';
-import { EntrepriseDTO } from '../models/entreprise-dto';
+import { EtudiantDTOPagedResult } from '../models/etudiant-dtopaged-result';
+import { EtudiantDTO } from '../models/etudiant-dto';
 @Injectable({
   providedIn: 'root',
 })
-class EntrepriseService extends __BaseService {
-  static readonly getPageLignePath = '/page/{ligne}';
-  static readonly getEntrepriseIdPath = '/Entreprise/{id}';
-  static readonly deleteEntrepriseIdPath = '/Entreprise/{id}';
-  static readonly postEntreprisePath = '/Entreprise';
-  static readonly putEntreprisePath = '/Entreprise';
+class EtudiantService extends __BaseService {
+  static readonly getEtudiantPageLignePath = '/Etudiant/page/{ligne}';
+  static readonly getEtudiantIdPath = '/Etudiant/{id}';
+  static readonly deleteEtudiantIdPath = '/Etudiant/{id}';
+  static readonly postEtudiantPath = '/Etudiant';
+  static readonly putEtudiantPath = '/Etudiant';
 
   constructor(
     config: __Configuration,
@@ -30,14 +30,14 @@ class EntrepriseService extends __BaseService {
    * @param ligne undefined
    * @return Success
    */
-  getPageLigneResponse(ligne: number): __Observable<__StrictHttpResponse<EntrepriseDTOPagedResult>> {
+  getEtudiantPageLigneResponse(ligne: number): __Observable<__StrictHttpResponse<EtudiantDTOPagedResult>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/page/${ligne}`,
+      this.rootUrl + `/Etudiant/page/${ligne}`,
       __body,
       {
         headers: __headers,
@@ -48,7 +48,7 @@ class EntrepriseService extends __BaseService {
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<EntrepriseDTOPagedResult>;
+        return _r as __StrictHttpResponse<EtudiantDTOPagedResult>;
       })
     );
   }
@@ -56,9 +56,9 @@ class EntrepriseService extends __BaseService {
    * @param ligne undefined
    * @return Success
    */
-  getPageLigne(ligne: number): __Observable<EntrepriseDTOPagedResult> {
-    return this.getPageLigneResponse(ligne).pipe(
-      __map(_r => _r.body as EntrepriseDTOPagedResult)
+  getEtudiantPageLigne(ligne: number): __Observable<EtudiantDTOPagedResult> {
+    return this.getEtudiantPageLigneResponse(ligne).pipe(
+      __map(_r => _r.body as EtudiantDTOPagedResult)
     );
   }
 
@@ -66,14 +66,14 @@ class EntrepriseService extends __BaseService {
    * @param id undefined
    * @return Success
    */
-  getEntrepriseIdResponse(id: number): __Observable<__StrictHttpResponse<EntrepriseDTO>> {
+  getEtudiantIdResponse(id: number): __Observable<__StrictHttpResponse<EtudiantDTO>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/Entreprise/${id}`,
+      this.rootUrl + `/Etudiant/${id}`,
       __body,
       {
         headers: __headers,
@@ -84,7 +84,7 @@ class EntrepriseService extends __BaseService {
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<EntrepriseDTO>;
+        return _r as __StrictHttpResponse<EtudiantDTO>;
       })
     );
   }
@@ -92,23 +92,23 @@ class EntrepriseService extends __BaseService {
    * @param id undefined
    * @return Success
    */
-  getEntrepriseId(id: number): __Observable<EntrepriseDTO> {
-    return this.getEntrepriseIdResponse(id).pipe(
-      __map(_r => _r.body as EntrepriseDTO)
+  getEtudiantId(id: number): __Observable<EtudiantDTO> {
+    return this.getEtudiantIdResponse(id).pipe(
+      __map(_r => _r.body as EtudiantDTO)
     );
   }
 
   /**
    * @param id undefined
    */
-  deleteEntrepriseIdResponse(id: number): __Observable<__StrictHttpResponse<null>> {
+  deleteEtudiantIdResponse(id: number): __Observable<__StrictHttpResponse<null>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
 
     let req = new HttpRequest<any>(
       'DELETE',
-      this.rootUrl + `/Entreprise/${id}`,
+      this.rootUrl + `/Etudiant/${id}`,
       __body,
       {
         headers: __headers,
@@ -126,8 +126,8 @@ class EntrepriseService extends __BaseService {
   /**
    * @param id undefined
    */
-  deleteEntrepriseId(id: number): __Observable<null> {
-    return this.deleteEntrepriseIdResponse(id).pipe(
+  deleteEtudiantId(id: number): __Observable<null> {
+    return this.deleteEtudiantIdResponse(id).pipe(
       __map(_r => _r.body as null)
     );
   }
@@ -136,14 +136,14 @@ class EntrepriseService extends __BaseService {
    * @param body undefined
    * @return Success
    */
-  postEntrepriseResponse(body?: EntrepriseDTO): __Observable<__StrictHttpResponse<EntrepriseDTO>> {
+  postEtudiantResponse(body?: EtudiantDTO): __Observable<__StrictHttpResponse<EtudiantDTO>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
     __body = body;
     let req = new HttpRequest<any>(
       'POST',
-      this.rootUrl + `/Entreprise`,
+      this.rootUrl + `/Etudiant`,
       __body,
       {
         headers: __headers,
@@ -154,7 +154,7 @@ class EntrepriseService extends __BaseService {
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<EntrepriseDTO>;
+        return _r as __StrictHttpResponse<EtudiantDTO>;
       })
     );
   }
@@ -162,9 +162,9 @@ class EntrepriseService extends __BaseService {
    * @param body undefined
    * @return Success
    */
-  postEntreprise(body?: EntrepriseDTO): __Observable<EntrepriseDTO> {
-    return this.postEntrepriseResponse(body).pipe(
-      __map(_r => _r.body as EntrepriseDTO)
+  postEtudiant(body?: EtudiantDTO): __Observable<EtudiantDTO> {
+    return this.postEtudiantResponse(body).pipe(
+      __map(_r => _r.body as EtudiantDTO)
     );
   }
 
@@ -172,14 +172,14 @@ class EntrepriseService extends __BaseService {
    * @param body undefined
    * @return Success
    */
-  putEntrepriseResponse(body?: EntrepriseDTO): __Observable<__StrictHttpResponse<EntrepriseDTO>> {
+  putEtudiantResponse(body?: EtudiantDTO): __Observable<__StrictHttpResponse<EtudiantDTO>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
     __body = body;
     let req = new HttpRequest<any>(
       'PUT',
-      this.rootUrl + `/Entreprise`,
+      this.rootUrl + `/Etudiant`,
       __body,
       {
         headers: __headers,
@@ -190,7 +190,7 @@ class EntrepriseService extends __BaseService {
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<EntrepriseDTO>;
+        return _r as __StrictHttpResponse<EtudiantDTO>;
       })
     );
   }
@@ -198,14 +198,14 @@ class EntrepriseService extends __BaseService {
    * @param body undefined
    * @return Success
    */
-  putEntreprise(body?: EntrepriseDTO): __Observable<EntrepriseDTO> {
-    return this.putEntrepriseResponse(body).pipe(
-      __map(_r => _r.body as EntrepriseDTO)
+  putEtudiant(body?: EtudiantDTO): __Observable<EtudiantDTO> {
+    return this.putEtudiantResponse(body).pipe(
+      __map(_r => _r.body as EtudiantDTO)
     );
   }
 }
 
-module EntrepriseService {
+module EtudiantService {
 }
 
-export { EntrepriseService }
+export { EtudiantService }
