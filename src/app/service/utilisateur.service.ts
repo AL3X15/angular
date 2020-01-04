@@ -14,7 +14,7 @@ export class UtilisateurService {
 	private admin : AdministrateurDTO;
 	private entreprise : EntrepriseDTO;
 	estAdmin = new BehaviorSubject<boolean>(false);
-	estEntreprise = new BehaviorSubject<boolean>(false);
+	estEnt = new BehaviorSubject<boolean>(false);
 	estPremuim = new BehaviorSubject<boolean>(false);
 	private token : JwtToken = {
 		access_token : null,
@@ -26,7 +26,15 @@ export class UtilisateurService {
 	};
  
 	estAuthentifie() : boolean{
-		return this.estAdmin.getValue() || this.estEntreprise.getValue();
+		return this.estAdmin.getValue() || this.estEnt.getValue();
+	}
+
+	estEntreprise() : boolean{
+		return this.estEnt.getValue();
+	}
+
+	estAdministrateur() : boolean{
+		return this.estAdmin.getValue();
 	}
 
 	getToken() : JwtToken{
@@ -39,7 +47,7 @@ export class UtilisateurService {
 			//TODO récupérer les roles du token
 			this.token = token;
 			this.estAdmin.next(token.estAdministrateur);
-			this.estEntreprise.next(token.estEntreprise);
+			this.estEnt.next(token.estEntreprise);
 			this.estPremuim.next(token.estPremuim);
 		}
 	}

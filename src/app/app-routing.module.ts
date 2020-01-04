@@ -5,6 +5,10 @@ import { FormulaireEntrepriseComponent } from './formulaire-entreprise/formulair
 import { FormulaireAnnonceComponent } from './formulaire-annonce/formulaire-annonce.component';
 import { AuthorisationGuard } from './guard/authorisation.guard';
 import { PostulationComponent } from './postulation/postulation.component';
+import { SignalementComponent } from './signalement/signalement.component';
+import { ListeAnnonceComponent } from './liste-annonce/liste-annonce.component';
+import { EntrepriseGuard } from './guard/entreprise.guard';
+import { AdministrateurGuard } from './guard/administrateur.guard';
 
 
 const routes: Routes = [
@@ -17,11 +21,19 @@ const routes: Routes = [
 	},{
 		path: "annonce",
 		component: FormulaireAnnonceComponent,
-		canActivate: [AuthorisationGuard],
+		canActivate: [AuthorisationGuard,EntrepriseGuard],
 	},{
 		path: "postulation",
 		component: PostulationComponent,
-		canActivate: [AuthorisationGuard],
+		canActivate: [AuthorisationGuard,EntrepriseGuard],
+	},{
+		path: "signalement",
+		component: SignalementComponent,
+		canActivate: [AuthorisationGuard,AdministrateurGuard],
+	},{
+		path: "mesAnnonces",
+		component: ListeAnnonceComponent,
+		canActivate: [AuthorisationGuard,EntrepriseGuard],
 	},{
 		path: "",
 		redirectTo: "/acceuil",

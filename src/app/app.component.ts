@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UtilisateurService } from './service/utilisateur.service';
 
 @Component({
@@ -6,12 +6,16 @@ import { UtilisateurService } from './service/utilisateur.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
 	title = 'smartcity';
 	constructor(private userService : UtilisateurService){
-		userService.estAdmin.subscribe(est => this.estAdmin = est);
-		userService.estEntreprise.subscribe(est => this.estEntreprise = est);
 	}
+
 	estAdmin : boolean;
 	estEntreprise : boolean;
+
+	ngOnInit() {
+		this.userService.estAdmin.subscribe(est => this.estAdmin = est);
+		this.userService.estEntreprise.subscribe(est => this.estEntreprise = est);
+	}
 }

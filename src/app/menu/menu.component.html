@@ -1,31 +1,61 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Dropdown
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
+	<div *ngIf="estEntreprise">
+		<a class="navbar-brand" routerLink="postulation">Navbar</a>
+	</div>
+	<div *ngIf="estAdmin">
+		<a class="navbar-brand" routerLink="signalement">Navbar</a>
+	</div>
+	
+	
+	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<ul class="navbar-nav mr-auto">
+			<div *ngIf="estEntreprise">
+				<li class="nav-item dropdown">
+					<div class="dropdown">
+						Annonce
+						<div class="dropdown-content">
+							<a routerLink="annonce">Créer une annonce</a>
+							<a routerLink="mesAnnonces">Lister mes annonces</a>
+						</div>
+					</div>
+				</li>
+			</div>
+			<div *ngIf="estEntreprise">
+				<li class="nav-item dropdown">
+					<div class="dropdown">
+						Postulation
+						<div class="dropdown-content">
+							<a routerLink="postulation">Consulter les postulations</a>
+						</div>
+					</div>
+				</li>
+			</div>
+			<li class="nav-item dropdown">
+				<div class="dropdown">
+					<span style="color:#f8f9fa;">
+						sss
+					</span>
+				</div>
+			</li>
+			<div *ngIf="estAdmin">
+				<li class="nav-item dropdown">
+					<div class="dropdown">
+						Administrateur
+						<div class="dropdown-content">
+							<a routerLink="#">Ajouter un administrateur</a>
+						</div>
+					</div>
+				</li>
+			</div>
+			<li class="nav-item dropdown">
+				<div class="dropdown">
+					Mon compte
+					<div class="dropdown-content">
+						<a routerLink="#">Voir mes informations</a>
+						<a routerLink="#">Déconnexion</a>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+</nav>

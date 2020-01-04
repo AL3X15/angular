@@ -4,20 +4,20 @@ import { Observable } from 'rxjs';
 import { UtilisateurService } from '../service/utilisateur.service';
 
 @Injectable({
-	providedIn: 'root'
+  providedIn: 'root'
 })
-export class AuthorisationGuard implements CanActivate {
-	
-	constructor(private service: UtilisateurService, private router: Router) {
+export class AdministrateurGuard implements CanActivate {
+
+  constructor(private service: UtilisateurService, private router: Router) {
 	}
 
 	canActivate(
 		next: ActivatedRouteSnapshot,
 		state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-		if (this.service.estAuthentifie())
+		if (this.service.estAdministrateur())
 			return true;
 		this.router.navigate(['acceuil']);
 		return false;
 	}
-	
+  
 }
