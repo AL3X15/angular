@@ -9,6 +9,7 @@ import { SignalementComponent } from './signalement/signalement.component';
 import { ListeAnnonceComponent } from './liste-annonce/liste-annonce.component';
 import { EntrepriseGuard } from './guard/entreprise.guard';
 import { AdministrateurGuard } from './guard/administrateur.guard';
+import { FormulaireAdministrateurComponent } from './formulaire-administrateur/formulaire-administrateur.component';
 
 
 const routes: Routes = [
@@ -29,6 +30,10 @@ const routes: Routes = [
 	},{
 		path: "signalement",
 		component: SignalementComponent,
+		canActivate: [AuthorisationGuard,AdministrateurGuard],
+	},{
+		path: "administrateur",
+		component: FormulaireAdministrateurComponent,
 		canActivate: [AuthorisationGuard,AdministrateurGuard],
 	},{
 		path: "mesAnnonces",

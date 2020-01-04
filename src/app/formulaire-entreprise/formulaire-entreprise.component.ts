@@ -13,17 +13,18 @@ import { Router } from '@angular/router';
 })
 export class FormulaireEntrepriseComponent implements OnInit {
 
-	constructor(private formBuilder: FormBuilder, private serviceEnt : EntrepriseService, serviceUser : UtilisateurService, private router: Router) {
+	constructor(private formBuilder: FormBuilder, private serviceEnt : EntrepriseService, private serviceUser : UtilisateurService, private router: Router) {
 	}
 
   	ngOnInit() {
-		this.serviceEnt.getEntreprise().subscribe(x => this.entreprise = x);
+		this.entreprise = this.serviceUser.getEntreprise();
 
 		if(this.entreprise === undefined)
 			this.formulaireCreation();
 		else
 			this.formulaireModification();
 	}
+
 	entrepriseForm : FormGroup;
 	entreprise : EntrepriseDTO;
 	
@@ -32,16 +33,23 @@ export class FormulaireEntrepriseComponent implements OnInit {
 		
 		if(this.entreprise === undefined){
 			if(entrepriseNouv.user.password == entrepriseNouv.user.confirmationPassword)
-			this.serviceEnt.postEntreprise(entrepriseNouv).subscribe();
+				this.serviceEnt.postEntreprise(entrepriseNouv).subscribe(
+					x => this.serviceUser.setEntreprise(x),
+					() => {},
+					() => this.router.navigate(['acceuil'])
+				);
 			else		
-			alert("il faut confirmer le mot de passe");
+				alert("il faut confirmer le mot de passe");
 		}
 		else{
 			entrepriseNouv.estPremium = this.entreprise.estPremium;
 			entrepriseNouv.user.nbSignalement = this.entreprise.user.nbSignalement;
-			this.serviceEnt.putEntreprise(entrepriseNouv).subscribe();
+			this.serviceEnt.putEntreprise(entrepriseNouv).subscribe(
+				x => this.serviceUser.setEntreprise(x),
+				() => {},
+				() => this.router.navigate(['acceuil'])
+			);
 		}
-		this.router.navigate(['acceuil']);
 	}
 
 	formulaireCreation(){

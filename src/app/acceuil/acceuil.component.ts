@@ -19,7 +19,7 @@ export class AcceuilComponent implements OnInit {
 			Password  : ['', Validators.required],
 		}); 
 		this.userService.estAdmin.subscribe(est => this.estAdmin = est);
-		this.userService.estEntreprise.subscribe(est => this.estEntreprise = est);
+		this.userService.estEnt.subscribe(est => this.estEntreprise = est);
 	}
 
 	estAdmin : boolean;
@@ -27,10 +27,14 @@ export class AcceuilComponent implements OnInit {
 	loginForm: FormGroup;
 
 	onSubmit(){
-		this.jwt.postJwt(this.loginForm.value).subscribe(x => this.userService.setToken(x));
-		if(this.estAdmin)
-			this.router.navigate(['signalement']);
-		else if(this.estEntreprise)
-			this.router.navigate(['postulation']);
+		this.jwt.postJwt(this.loginForm.value).subscribe(
+			x => this.userService.setToken(x),
+			() => {},
+			() => {
+				if(this.estAdmin)
+					this.router.navigate(['signalement']);
+				else if(this.estEntreprise)
+					this.router.navigate(['postulation']);
+			});
 	}
 }

@@ -14,6 +14,7 @@ import { ApiInterceptor } from './ApiInterceptor';
 import { PostulationComponent } from './postulation/postulation.component';
 import { SignalementComponent } from './signalement/signalement.component';
 import { ListeAnnonceComponent } from './liste-annonce/liste-annonce.component';
+import { FormulaireAdministrateurComponent } from './formulaire-administrateur/formulaire-administrateur.component';
 
 export const API_INTERCEPTOR_PROVIDER: Provider = {
   provide: HTTP_INTERCEPTORS,
@@ -30,7 +31,8 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
     MenuComponent,
     PostulationComponent,
     SignalementComponent,
-    ListeAnnonceComponent
+    ListeAnnonceComponent,
+    FormulaireAdministrateurComponent
   ],
   imports: [
     BrowserModule,

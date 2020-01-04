@@ -8,23 +8,19 @@ import { AdministrateurDTO, EntrepriseDTO } from '../api/models';
 	providedIn: 'root'
 })
 export class UtilisateurService {
-
-	constructor(private serviceEnt : EntrepriseService, private serviceAdmin : AdministrateurService) { }
+	//TODO onDestroy
+	constructor(private serviceEnt : EntrepriseService, private serviceAdmin : AdministrateurService) {
+		this.resetToken()
+	}
 
 	private admin : AdministrateurDTO;
 	private entreprise : EntrepriseDTO;
 	estAdmin = new BehaviorSubject<boolean>(false);
 	estEnt = new BehaviorSubject<boolean>(false);
 	estPremuim = new BehaviorSubject<boolean>(false);
-	private token : JwtToken = {
-		access_token : null,
-		expires_in : null,
-		estEtudiant : null,
-		estAdministrateur : null,
-		estEntreprise : null,
-		estPremuim : null,
-	};
- 
+	creationAdmin = new BehaviorSubject<boolean>(false);
+	private token : JwtToken;
+
 	estAuthentifie() : boolean{
 		return this.estAdmin.getValue() || this.estEnt.getValue();
 	}
@@ -40,6 +36,7 @@ export class UtilisateurService {
 	getToken() : JwtToken{
 		return this.token;
 	}
+
 	setToken(token : JwtToken){
 		if(token.estEtudiant){
 			//TODO interdire les étudiants
@@ -53,15 +50,41 @@ export class UtilisateurService {
 	}
 
 	getEntreprise(){
-		if(this.entreprise === undefined)
+		if(this.entreprise === undefined && this.token.access_token != null)
 			this.serviceEnt.getEntreprise().subscribe(x => this.entreprise == x);
 		return this.entreprise;
 	}
 
 	getAdministrateur(){
-		if(this.admin === undefined)
+		if(this.admin === undefined && this.token.access_token != null)
 			this.serviceAdmin.getAdministrateur().subscribe(x => this.admin == x);
 		return this.admin;
+	}
+
+	setEntreprise(ent : EntrepriseDTO){
+		this.entreprise = ent;
+	}
+
+	setAdministrateur(admin : AdministrateurDTO){
+		this.admin = admin;
+	}
+
+	deconnexion() {
+		this.resetToken();
+		this.estAdmin.next(false);
+		this.estEnt.next(false);
+		this.estPremuim.next(false);
+	}
+
+	resetToken(){
+		this.token = {
+			access_token : null,
+			expires_in : null,
+			estEtudiant : null,
+			estAdministrateur : null,
+			estEntreprise : null,
+			estPremuim : null,
+		};
 	}
 
 }

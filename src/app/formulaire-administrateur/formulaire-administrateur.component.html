@@ -1,0 +1,60 @@
+<form [formGroup]="adminForm" (ngSubmit)="onSubmit()">
+  
+	<div formGroupName="user">
+		<label>Nom : </label>
+		<input type="text" formControlName="nom">
+		<div style="color : red;" *ngIf="adminForm.get('user.nom').hasError('required') && adminForm.get('user.nom').touched">
+			il faut un nom
+		</div>
+		<br><br>
+    </div>
+
+    <label>Prenom : </label>
+	<input type="text" formControlName="prenom">
+	<div style="color : red;" *ngIf="adminForm.get('prenom').hasError('required') && adminForm.get('prenom').touched">
+		il faut prenom
+	</div>
+	<br><br>
+        
+    <div formGroupName="user">
+		<label>Numero De telephone : </label>
+		<input type="text" formControlName="phoneNumber">
+		<div style="color : red;" *ngIf="adminForm.get('user.phoneNumber').hasError('required') && adminForm.get('user.phoneNumber').touched">
+			il faut un numero De telephone
+		</div>
+		<div style="color : red;" *ngIf="adminForm.get('user.phoneNumber').hasError('pattern') && adminForm.get('user.phoneNumber').touched">
+			numero De telephone non valide
+		</div>
+		<br><br>
+	
+		<label>Email : </label>
+		<input type="email" formControlName="email">
+		<div style="color : red;" *ngIf="adminForm.get('user.email').hasError('required') && adminForm.get('user.email').touched">
+			il faut une adresse mail
+		</div>
+		<div style="color : red;" *ngIf="adminForm.get('user.email').hasError('pattern') && adminForm.get('user.email').touched">
+			adresse mail non valide
+		</div>
+		<br><br>
+	</div>
+
+	<div *ngIf="entreprise === undefined" formGroupName="user">
+		<label>Mot de passe : </label>
+		<input type="text" formControlName="password">
+		<div style="color : red;" *ngIf="adminForm.get('user.password').hasError('required') && adminForm.get('user.password').touched">
+			il faut un mot de passe
+		</div>
+		<br><br>
+
+		<label>Confirmation de mot de passe : </label>
+		<input type="text" formControlName="confirmationPassword">
+		<div style="color : red;" *ngIf="adminForm.get('user.confirmationPassword').hasError('required') && adminForm.get('user.confirmationPassword').touched">
+			il faut confirmer le mot de passe 
+		</div>
+		<br><br>
+	</div>
+
+
+	<button type="submit" [disabled]="!adminForm.valid">Submit</button>
+</form>
+

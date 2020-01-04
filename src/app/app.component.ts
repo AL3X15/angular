@@ -16,6 +16,6 @@ export class AppComponent implements OnInit{
 
 	ngOnInit() {
 		this.userService.estAdmin.subscribe(est => this.estAdmin = est);
-		this.userService.estEntreprise.subscribe(est => this.estEntreprise = est);
+		this.userService.estEnt.subscribe(est => this.estEntreprise = est);
 	}
 }

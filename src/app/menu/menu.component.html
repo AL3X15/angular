@@ -19,8 +19,15 @@
 						</div>
 					</div>
 				</li>
-			</div>
-			<div *ngIf="estEntreprise">
+			
+				<li class="nav-item dropdown">
+					<div class="dropdown">
+						<span style="color:#f8f9fa;">
+							sss
+						</span>
+					</div>
+				</li>
+
 				<li class="nav-item dropdown">
 					<div class="dropdown">
 						Postulation
@@ -30,6 +37,19 @@
 					</div>
 				</li>
 			</div>
+
+
+			<div *ngIf="estAdmin">
+				<li class="nav-item dropdown">
+					<div class="dropdown">
+						Administrateur
+						<div class="dropdown-content">
+							<a (click)="formulaireAdmin(true)">Ajouter un administrateur</a>
+						</div>
+					</div>
+				</li>
+			</div>
+
 			<li class="nav-item dropdown">
 				<div class="dropdown">
 					<span style="color:#f8f9fa;">
@@ -37,22 +57,18 @@
 					</span>
 				</div>
 			</li>
-			<div *ngIf="estAdmin">
-				<li class="nav-item dropdown">
-					<div class="dropdown">
-						Administrateur
-						<div class="dropdown-content">
-							<a routerLink="#">Ajouter un administrateur</a>
-						</div>
-					</div>
-				</li>
-			</div>
+
 			<li class="nav-item dropdown">
 				<div class="dropdown">
 					Mon compte
 					<div class="dropdown-content">
-						<a routerLink="#">Voir mes informations</a>
-						<a routerLink="#">Déconnexion</a>
+						<div *ngIf="estAdmin">
+							<a (click)="formulaireAdmin(false)">Voir mes informations</a>
+						</div>
+						<div *ngIf="estEntreprise">
+							<a routerLink="entreprise">Voir mes informations</a>
+						</div>
+						<a (click)="deconnexion()">Déconnexion</a>
 					</div>
 				</div>
 			</li>
