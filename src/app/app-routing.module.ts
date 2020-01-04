@@ -4,6 +4,7 @@ import { AcceuilComponent } from './acceuil/acceuil.component';
 import { FormulaireEntrepriseComponent } from './formulaire-entreprise/formulaire-entreprise.component';
 import { FormulaireAnnonceComponent } from './formulaire-annonce/formulaire-annonce.component';
 import { AuthorisationGuard } from './guard/authorisation.guard';
+import { PostulationComponent } from './postulation/postulation.component';
 
 
 const routes: Routes = [
@@ -13,10 +14,13 @@ const routes: Routes = [
 	},{
 		path: "entreprise",
 		component: FormulaireEntrepriseComponent,
-		canActivate: [AuthorisationGuard],
 	},{
 		path: "annonce",
 		component: FormulaireAnnonceComponent,
+		canActivate: [AuthorisationGuard],
+	},{
+		path: "postulation",
+		component: PostulationComponent,
 		canActivate: [AuthorisationGuard],
 	},{
 		path: "",

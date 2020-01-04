@@ -1,15 +1,18 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { JwtToken } from '../model/JwtToken';
-import { JwtService } from '../api/services';
+import { JwtService, EntrepriseService, AdministrateurService } from '../api/services';
+import { AdministrateurDTO, EntrepriseDTO } from '../api/models';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class UtilisateurService {
 
-	constructor() { }
+	constructor(private serviceEnt : EntrepriseService, private serviceAdmin : AdministrateurService) { }
 
+	private admin : AdministrateurDTO;
+	private entreprise : EntrepriseDTO;
 	estAdmin = new BehaviorSubject<boolean>(false);
 	estEntreprise = new BehaviorSubject<boolean>(false);
 	estPremuim = new BehaviorSubject<boolean>(false);
@@ -27,18 +30,30 @@ export class UtilisateurService {
 	}
 
 	getToken() : JwtToken{
-		return this.token
+		return this.token;
 	}
 	setToken(token : JwtToken){
 		if(token.estEtudiant){
 			//TODO interdire les étudiants
+		}else{
+			//TODO récupérer les roles du token
+			this.token = token;
+			this.estAdmin.next(token.estAdministrateur);
+			this.estEntreprise.next(token.estEntreprise);
+			this.estPremuim.next(token.estPremuim);
 		}
-		//TODO récupérer les roles du token
-		this.token = token;
-		this.estAdmin.next(token.estAdministrateur);
-		this.estEntreprise.next(token.estEntreprise);
-		this.estPremuim.next(token.estPremuim);
-		
+	}
+
+	getEntreprise(){
+		if(this.entreprise === undefined)
+			this.serviceEnt.getEntreprise().subscribe(x => this.entreprise == x);
+		return this.entreprise;
+	}
+
+	getAdministrateur(){
+		if(this.admin === undefined)
+			this.serviceAdmin.getAdministrateur().subscribe(x => this.admin == x);
+		return this.admin;
 	}
 
 }

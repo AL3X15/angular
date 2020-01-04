@@ -16,6 +16,7 @@ class EntrepriseService extends __BaseService {
   static readonly getPageLignePath = '/page/{ligne}';
   static readonly getEntrepriseIdPath = '/Entreprise/{id}';
   static readonly deleteEntrepriseIdPath = '/Entreprise/{id}';
+  static readonly getEntreprisePath = '/Entreprise';
   static readonly postEntreprisePath = '/Entreprise';
   static readonly putEntreprisePath = '/Entreprise';
 
@@ -129,6 +130,39 @@ class EntrepriseService extends __BaseService {
   deleteEntrepriseId(id: number): __Observable<null> {
     return this.deleteEntrepriseIdResponse(id).pipe(
       __map(_r => _r.body as null)
+    );
+  }
+
+  /**
+   * @return Success
+   */
+  getEntrepriseResponse(): __Observable<__StrictHttpResponse<EntrepriseDTO>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+    let req = new HttpRequest<any>(
+      'GET',
+      this.rootUrl + `/Entreprise`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<EntrepriseDTO>;
+      })
+    );
+  }
+  /**
+   * @return Success
+   */
+  getEntreprise(): __Observable<EntrepriseDTO> {
+    return this.getEntrepriseResponse().pipe(
+      __map(_r => _r.body as EntrepriseDTO)
     );
   }
 

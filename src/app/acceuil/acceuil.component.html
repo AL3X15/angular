@@ -1,3 +1,5 @@
+<h4>Se connecter</h4>
+
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <label>Email : </label>
     <input type="email" formControlName="UserName">
@@ -9,7 +11,7 @@
     </div>
     <br><br>
 
-    <label>Nom du responsable : </label>
+    <label>Mot de passe : </label>
     <input type="text" formControlName="Password">
     <div style="color : red;" *ngIf="loginForm.get('Password').hasError('required') && loginForm.get('Password').touched">
         il faut un mot de passe
@@ -18,6 +20,6 @@
     <button type="submit" [disabled]="!loginForm.valid">Submit</button>
 </form>
 
-<button routerLink="/entreprise">S'inscrire</button>
+<h4>S'inscrire</h4>
 
-<button (click)="test()">test</button>
+<button routerLink="/entreprise">S'inscrire</button>

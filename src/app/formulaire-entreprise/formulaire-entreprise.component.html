@@ -1,31 +1,33 @@
 <form [formGroup]="entrepriseForm" (ngSubmit)="onSubmit()">
   
-	<label>Name : </label>
-	<input type="text" formControlName="nom">
-	<div style="color : red;" *ngIf="entrepriseForm.get('nom').hasError('required') && entrepriseForm.get('nom').touched">
-		il faut un nom
+	<div formGroupName="user">
+		<label>Nom : </label>
+		<input type="text" formControlName="nom">
+		<div style="color : red;" *ngIf="entrepriseForm.get('user.nom').hasError('required') && entrepriseForm.get('user.nom').touched">
+			il faut un nom
+		</div>
+		<br><br>
+	
+		<label>Numero De telephone : </label>
+		<input type="text" formControlName="phoneNumber">
+		<div style="color : red;" *ngIf="entrepriseForm.get('user.phoneNumber').hasError('required') && entrepriseForm.get('user.phoneNumber').touched">
+			il faut un numero De telephone
+		</div>
+		<div style="color : red;" *ngIf="entrepriseForm.get('user.phoneNumber').hasError('pattern') && entrepriseForm.get('user.phoneNumber').touched">
+			numero De telephone non valide
+		</div>
+		<br><br>
+	
+		<label>Email : </label>
+		<input type="email" formControlName="email">
+		<div style="color : red;" *ngIf="entrepriseForm.get('user.email').hasError('required') && entrepriseForm.get('user.email').touched">
+			il faut une adresse mail
+		</div>
+		<div style="color : red;" *ngIf="entrepriseForm.get('user.email').hasError('pattern') && entrepriseForm.get('user.email').touched">
+			adresse mail non valide
+		</div>
+		<br><br>
 	</div>
-	<br><br>
-
-	<label>Numero De telephone : </label>
-	<input type="text" formControlName="numeroTelephone">
-	<div style="color : red;" *ngIf="entrepriseForm.get('numeroTelephone').hasError('required') && entrepriseForm.get('numeroTelephone').touched">
-		il faut un numero De telephone
-	</div>
-	<div style="color : red;" *ngIf="entrepriseForm.get('numeroTelephone').hasError('pattern') && entrepriseForm.get('numeroTelephone').touched">
-		numero De telephone non valide
-	</div>
-	<br><br>
-
-	<label>Email : </label>
-	<input type="email" formControlName="email">
-	<div style="color : red;" *ngIf="entrepriseForm.get('email').hasError('required') && entrepriseForm.get('email').touched">
-		il faut une adresse mail
-	</div>
-	<div style="color : red;" *ngIf="entrepriseForm.get('email').hasError('pattern') && entrepriseForm.get('email').touched">
-		adresse mail non valide
-	</div>
-	<br><br>
 
 	<label>Nom du responsable : </label>
 	<input type="text" formControlName="nomResponsable">
@@ -46,8 +48,8 @@
 
 	<div formGroupName="adresse">	
 		<label>Route : </label>
-		<input type="text" formControlName="route">
-		<div style="color : red;" *ngIf="entrepriseForm.get('adresse.route').hasError('required') && entrepriseForm.get('adresse.route').touched">
+		<input type="text" formControlName="rue">
+		<div style="color : red;" *ngIf="entrepriseForm.get('adresse.rue').hasError('required') && entrepriseForm.get('adresse.rue').touched">
 			il faut une route
 		</div>
 		<br><br>
@@ -59,23 +61,42 @@
 		</div>
 		<br><br>
 
-		<label>Code postal : </label>
-		<input type="text" formControlName="codePostal">
-		<div style="color : red;" *ngIf="entrepriseForm.get('adresse.codePostal').hasError('required') && entrepriseForm.get('adresse.codePostal').touched">
-			il faut un code postal
+		<div formGroupName="localite">
+			<label>Code postal : </label>
+			<input type="text" formControlName="codePostal">
+			<div style="color : red;" *ngIf="entrepriseForm.get('adresse.localite.codePostal').hasError('required') && entrepriseForm.get('adresse.localite.codePostal').touched">
+				il faut un code postal
+			</div>
+			<div style="color : red;" *ngIf="entrepriseForm.get('adresse.localite.codePostal').hasError('pattern') && entrepriseForm.get('adresse.localite.codePostal').touched">
+				code postal non valide
+			</div>
+			<br><br>
+
+			<label>Nom localite : </label>
+			<input type="text" formControlName="nom">
+			<div style="color : red;" *ngIf="entrepriseForm.get('adresse.localite.nom').hasError('required') && entrepriseForm.get('adresse.localite.nom').touched">
+				il faut un nom de localite
+			</div>
+			<br><br>
 		</div>
-		<div style="color : red;" *ngIf="entrepriseForm.get('adresse.codePostal').hasError('pattern') && entrepriseForm.get('adresse.codePostal').touched">
-			code postal non valide
+	</div>
+
+	<div *ngIf="entreprise === undefined" formGroupName="user">
+		<label>Mot de passe : </label>
+		<input type="text" formControlName="password">
+		<div style="color : red;" *ngIf="entrepriseForm.get('user.password').hasError('required') && entrepriseForm.get('user.password').touched">
+			il faut un mot de passe
 		</div>
 		<br><br>
 
-		<label>Localite : </label>
-		<input type="text" formControlName="localite">
-		<div style="color : red;" *ngIf="entrepriseForm.get('adresse.localite').hasError('required') && entrepriseForm.get('adresse.localite').touched">
-			il faut une localite
+		<label>Confirmation de mot de passe : </label>
+		<input type="text" formControlName="confirmationPassword">
+		<div style="color : red;" *ngIf="entrepriseForm.get('user.confirmationPassword').hasError('required') && entrepriseForm.get('user.confirmationPassword').touched">
+			il faut confirmer le mot de passe 
 		</div>
 		<br><br>
 	</div>
+
 
 	<button type="submit" [disabled]="!entrepriseForm.valid">Submit</button>
 </form>

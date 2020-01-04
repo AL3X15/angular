@@ -6,6 +6,9 @@ export class UserModel implements UserDTO {
     motDePasse: string;
     nom: string;
     phoneNumber: string;
+    nbSignalement : number;
+    password : string;
+    confirmationPassword : string;
     public UserModel(){}
   }
   
