@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UtilisateurService } from '../service/utilisateur.service';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { EntrepriseService, AdministrateurService } from '../api/services';
 
 @Component({
 	selector: 'app-menu',
@@ -10,7 +10,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class MenuComponent implements OnInit {
 
-	constructor(private userService : UtilisateurService, private router: Router){
+	constructor(private userService : UtilisateurService, private router: Router, private serviceEnt : EntrepriseService, private serviceAdmin : AdministrateurService){
 	}
 	
 	estAdmin : boolean;
@@ -26,9 +26,23 @@ export class MenuComponent implements OnInit {
 		this.router.navigate(['acceuil']);
 	}
 
-	formulaireAdmin(estCreation : boolean){
-		this.userService.creationAdmin.next(estCreation);
-		this.router.navigate(['administrateur']);
+	formulaireAdmin(){
+		this.userService.creationAdmin.next(true);
+		this.router.navigate(['administrateurForm']);
+	}
+
+	voirProfil(){
+		if(this.estAdmin){
+			this.serviceAdmin.getAdministrateur().subscribe(
+				x => this.userService.setAdministrateur(x),
+				() => {},
+				() => this.router.navigate(["profil"]));
+		}else{
+			this.serviceEnt.getEntreprise().subscribe(
+				x => this.userService.setEntreprise(x),
+				() => {},
+				() => this.router.navigate(["profil"]));
+		}
 	}
 
 }

@@ -1,77 +1,50 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg bg-secondary fixed-top text-white">
+	<img src="../assets/logo.png"  width="50" height="50" id="pictureNavBar">
 	<div *ngIf="estEntreprise">
-		<a class="navbar-brand" routerLink="postulation">Navbar</a>
+		<a class="navbar-brand" style="color: white;" routerLink="postulation">Jober</a>
 	</div>
 	<div *ngIf="estAdmin">
-		<a class="navbar-brand" routerLink="signalement">Navbar</a>
+		<a class="navbar-brand" style="color: white;" routerLink="signalement">Jober</a>
 	</div>
 	
-	
-	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+  
+	<div class="collapse navbar-collapse" id="navbarsExampleDefault">
 		<ul class="navbar-nav mr-auto">
 			<div *ngIf="estEntreprise">
-				<li class="nav-item dropdown">
-					<div class="dropdown">
-						Annonce
-						<div class="dropdown-content">
-							<a routerLink="annonce">Créer une annonce</a>
-							<a routerLink="mesAnnonces">Lister mes annonces</a>
-						</div>
+				<li ngbDropdown class="nav-item dropdown show">
+					<a ngbDropdownToggle class="nav-link dropdown-toggle show"  id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Annonce</a>
+					<div ngbDropdownMenu class="dropdown-menu show" aria-labelledby="dropdown01">
+						<a class="dropdown-item"  routerLink="/annonce">Créer une annonce</a>
+						<a class="dropdown-item" routerLink="/mesAnnonces">Lister mes annonces</a>  
 					</div>
 				</li>
+				<li ngbDropdown class="nav-item dropdown show">
+					<a ngbDropdownToggle class="nav-link dropdown-toggle show"  id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Postulation</a>
+					<div ngbDropdownMenu class="dropdown-menu show" aria-labelledby="dropdown01">
+						<a class="dropdown-item" routerLink="/postulation" >Consulter les postulations</a>
+					</div>
+				</li>
+			</div>
 			
-				<li class="nav-item dropdown">
-					<div class="dropdown">
-						<span style="color:#f8f9fa;">
-							sss
-						</span>
-					</div>
-				</li>
-
-				<li class="nav-item dropdown">
-					<div class="dropdown">
-						Postulation
-						<div class="dropdown-content">
-							<a routerLink="postulation">Consulter les postulations</a>
-						</div>
-					</div>
-				</li>
-			</div>
-
-
 			<div *ngIf="estAdmin">
-				<li class="nav-item dropdown">
-					<div class="dropdown">
-						Administrateur
-						<div class="dropdown-content">
-							<a (click)="formulaireAdmin(true)">Ajouter un administrateur</a>
-						</div>
+				<li ngbDropdown class="nav-item dropdown show">
+					<a ngbDropdownToggle class="nav-link dropdown-toggle show"  id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Administrateur</a>
+					<div ngbDropdownMenu class="dropdown-menu show" aria-labelledby="dropdown01">
+						<a class="dropdown-item" (click)="formulaireAdmin()">Ajouter un administrateur</a>
+					</div>
+				</li>
+				<li ngbDropdown class="nav-item dropdown show">
+					<a ngbDropdownToggle class="nav-link dropdown-toggle show"  id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mon compte</a>
+					<div ngbDropdownMenu class="dropdown-menu show" aria-labelledby="dropdown01">
+						<a class="dropdown-item" (click)="voirProfil()">Voir mes informations</a>
+						<a class="dropdown-item" (click)="deconnexion()">Déconnexion</a>
 					</div>
 				</li>
 			</div>
-
-			<li class="nav-item dropdown">
-				<div class="dropdown">
-					<span style="color:#f8f9fa;">
-						sss
-					</span>
-				</div>
-			</li>
-
-			<li class="nav-item dropdown">
-				<div class="dropdown">
-					Mon compte
-					<div class="dropdown-content">
-						<div *ngIf="estAdmin">
-							<a (click)="formulaireAdmin(false)">Voir mes informations</a>
-						</div>
-						<div *ngIf="estEntreprise">
-							<a routerLink="entreprise">Voir mes informations</a>
-						</div>
-						<a (click)="deconnexion()">Déconnexion</a>
-					</div>
-				</div>
-			</li>
 		</ul>
 	</div>
 </nav>
+  

@@ -10,6 +10,8 @@ import { ListeAnnonceComponent } from './liste-annonce/liste-annonce.component';
 import { EntrepriseGuard } from './guard/entreprise.guard';
 import { AdministrateurGuard } from './guard/administrateur.guard';
 import { FormulaireAdministrateurComponent } from './formulaire-administrateur/formulaire-administrateur.component';
+import { AffichageProfilComponent } from './affichage-profil/affichage-profil.component';
+
 
 
 const routes: Routes = [
@@ -17,7 +19,7 @@ const routes: Routes = [
 		path: "acceuil",
 		component: AcceuilComponent,
 	},{
-		path: "entreprise",
+		path: "entrepriseForm",
 		component: FormulaireEntrepriseComponent,
 	},{
 		path: "annonce",
@@ -32,13 +34,17 @@ const routes: Routes = [
 		component: SignalementComponent,
 		canActivate: [AuthorisationGuard,AdministrateurGuard],
 	},{
-		path: "administrateur",
+		path: "administrateurForm",
 		component: FormulaireAdministrateurComponent,
 		canActivate: [AuthorisationGuard,AdministrateurGuard],
 	},{
 		path: "mesAnnonces",
 		component: ListeAnnonceComponent,
 		canActivate: [AuthorisationGuard,EntrepriseGuard],
+	},{
+		path: "profil",
+		component: AffichageProfilComponent,
+		canActivate: [AuthorisationGuard],
 	},{
 		path: "",
 		redirectTo: "/acceuil",

@@ -15,36 +15,40 @@ import { PostulationComponent } from './postulation/postulation.component';
 import { SignalementComponent } from './signalement/signalement.component';
 import { ListeAnnonceComponent } from './liste-annonce/liste-annonce.component';
 import { FormulaireAdministrateurComponent } from './formulaire-administrateur/formulaire-administrateur.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { AffichageProfilComponent } from './affichage-profil/affichage-profil.component';
+
 
 export const API_INTERCEPTOR_PROVIDER: Provider = {
-  provide: HTTP_INTERCEPTORS,
-  useExisting: forwardRef(() => ApiInterceptor),
-  multi: true
+	provide: HTTP_INTERCEPTORS,
+	useExisting: forwardRef(() => ApiInterceptor),
+	multi: true
 };
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    AcceuilComponent,
-    FormulaireEntrepriseComponent,
-    FormulaireAnnonceComponent,
-    MenuComponent,
-    PostulationComponent,
-    SignalementComponent,
-    ListeAnnonceComponent,
-    FormulaireAdministrateurComponent
-  ],
-  imports: [
-    BrowserModule,
-	AppRoutingModule,
-	HttpClientModule,
-	ReactiveFormsModule,
-	NoopAnimationsModule,
-	ApiModule.forRoot({rootUrl : "http://localhost:5000"})
-  //ApiModule.forRoot({rootUrl : "http://localhost:44367"})
-  ],
-  providers: [ApiInterceptor,
-    API_INTERCEPTOR_PROVIDER],
-  bootstrap: [AppComponent]
+	declarations: [
+		AppComponent,
+		AcceuilComponent,
+		FormulaireEntrepriseComponent,
+		FormulaireAnnonceComponent,
+		MenuComponent,
+		PostulationComponent,
+		SignalementComponent,
+		ListeAnnonceComponent,
+		FormulaireAdministrateurComponent,
+		AffichageProfilComponent
+	],
+	imports: [
+		BrowserModule,
+		NgbModule,
+		AppRoutingModule,
+		HttpClientModule,
+		ReactiveFormsModule,
+		NoopAnimationsModule,
+		ApiModule.forRoot({rootUrl : "http://localhost:5000"})
+	],
+	providers: [ApiInterceptor,
+		API_INTERCEPTOR_PROVIDER],
+	bootstrap: [AppComponent]
 })
 export class AppModule { }

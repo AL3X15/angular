@@ -50,14 +50,10 @@ export class UtilisateurService {
 	}
 
 	getEntreprise(){
-		if(this.entreprise === undefined && this.token.access_token != null)
-			this.serviceEnt.getEntreprise().subscribe(x => this.entreprise == x);
 		return this.entreprise;
 	}
 
 	getAdministrateur(){
-		if(this.admin === undefined && this.token.access_token != null)
-			this.serviceAdmin.getAdministrateur().subscribe(x => this.admin == x);
 		return this.admin;
 	}
 
