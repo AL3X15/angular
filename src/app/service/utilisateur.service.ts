@@ -18,7 +18,6 @@ export class UtilisateurService {
 	estAdmin = new BehaviorSubject<boolean>(false);
 	estEnt = new BehaviorSubject<boolean>(false);
 	estPremuim = new BehaviorSubject<boolean>(false);
-	creationAdmin = new BehaviorSubject<boolean>(false);
 	private token : JwtToken;
 
 	estAuthentifie() : boolean{

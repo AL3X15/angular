@@ -38,16 +38,16 @@
 		<br><br>
 	</div>
 
-	<div *ngIf="entreprise === undefined" formGroupName="user">
+	<div *ngIf="administrateur === undefined" formGroupName="user">
 		<label>Mot de passe : </label>
-		<input type="text" formControlName="password">
+		<input type="password" formControlName="password">
 		<div style="color : red;" *ngIf="adminForm.get('user.password').hasError('required') && adminForm.get('user.password').touched">
 			il faut un mot de passe
 		</div>
 		<br><br>
 
 		<label>Confirmation de mot de passe : </label>
-		<input type="text" formControlName="confirmationPassword">
+		<input type="password" formControlName="confirmationPassword">
 		<div style="color : red;" *ngIf="adminForm.get('user.confirmationPassword').hasError('required') && adminForm.get('user.confirmationPassword').touched">
 			il faut confirmer le mot de passe 
 		</div>

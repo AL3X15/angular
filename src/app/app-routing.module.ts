@@ -11,6 +11,7 @@ import { EntrepriseGuard } from './guard/entreprise.guard';
 import { AdministrateurGuard } from './guard/administrateur.guard';
 import { FormulaireAdministrateurComponent } from './formulaire-administrateur/formulaire-administrateur.component';
 import { AffichageProfilComponent } from './affichage-profil/affichage-profil.component';
+import { FormulaireChangelentPasswordComponent } from './formulaire-changelent-password/formulaire-changelent-password.component';
 
 
 
@@ -44,6 +45,10 @@ const routes: Routes = [
 	},{
 		path: "profil",
 		component: AffichageProfilComponent,
+		canActivate: [AuthorisationGuard],
+	},{
+		path: "modifPassword",
+		component: FormulaireChangelentPasswordComponent,
 		canActivate: [AuthorisationGuard],
 	},{
 		path: "",

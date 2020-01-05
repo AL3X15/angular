@@ -15,17 +15,14 @@ export class FormulaireAdministrateurComponent implements OnInit {
 	constructor(private formBuilder: FormBuilder, private serviceAdmin : AdministrateurService, private serviceUser : UtilisateurService, private router: Router) { }
 
 	ngOnInit() {
-		this.serviceUser.estAdmin.subscribe(est => this.estCreation = est);
-		if(this.estCreation)
-			this.formulaireCreation();
-		else{
-			this.administrateur = this.serviceUser.getAdministrateur();
-			this.formulaireModification();
-		}
+		this.administrateur = this.serviceUser.getAdministrateur();
 
+		if(this.administrateur === undefined)
+			this.formulaireCreation();
+		else
+			this.formulaireModification();
 	}
 	
-	estCreation : boolean;
 	adminForm : FormGroup;
 	administrateur : AdministrateurDTO;
 

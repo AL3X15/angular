@@ -33,17 +33,18 @@
 				<li ngbDropdown class="nav-item dropdown show">
 					<a ngbDropdownToggle class="nav-link dropdown-toggle show"  id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Administrateur</a>
 					<div ngbDropdownMenu class="dropdown-menu show" aria-labelledby="dropdown01">
-						<a class="dropdown-item" (click)="formulaireAdmin()">Ajouter un administrateur</a>
-					</div>
-				</li>
-				<li ngbDropdown class="nav-item dropdown show">
-					<a ngbDropdownToggle class="nav-link dropdown-toggle show"  id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mon compte</a>
-					<div ngbDropdownMenu class="dropdown-menu show" aria-labelledby="dropdown01">
-						<a class="dropdown-item" (click)="voirProfil()">Voir mes informations</a>
-						<a class="dropdown-item" (click)="deconnexion()">Déconnexion</a>
+						<a class="dropdown-item" routerLink="administrateurForm">Ajouter un administrateur</a>
 					</div>
 				</li>
 			</div>
+
+			<li ngbDropdown class="nav-item dropdown show">
+				<a ngbDropdownToggle class="nav-link dropdown-toggle show"  id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mon compte</a>
+				<div ngbDropdownMenu class="dropdown-menu show" aria-labelledby="dropdown01">
+					<a class="dropdown-item" (click)="voirProfil()">Voir mes informations</a>
+					<a class="dropdown-item" (click)="deconnexion()">Déconnexion</a>
+				</div>
+			</li>
 		</ul>
 	</div>
 </nav>

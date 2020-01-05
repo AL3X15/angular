@@ -27,7 +27,6 @@ export class MenuComponent implements OnInit {
 	}
 
 	formulaireAdmin(){
-		this.userService.creationAdmin.next(true);
 		this.router.navigate(['administrateurForm']);
 	}
 

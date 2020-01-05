@@ -17,6 +17,7 @@ import { ListeAnnonceComponent } from './liste-annonce/liste-annonce.component';
 import { FormulaireAdministrateurComponent } from './formulaire-administrateur/formulaire-administrateur.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { AffichageProfilComponent } from './affichage-profil/affichage-profil.component';
+import { FormulaireChangelentPasswordComponent } from './formulaire-changelent-password/formulaire-changelent-password.component';
 
 
 export const API_INTERCEPTOR_PROVIDER: Provider = {
@@ -36,7 +37,8 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
 		SignalementComponent,
 		ListeAnnonceComponent,
 		FormulaireAdministrateurComponent,
-		AffichageProfilComponent
+		AffichageProfilComponent,
+		FormulaireChangelentPasswordComponent
 	],
 	imports: [
 		BrowserModule,

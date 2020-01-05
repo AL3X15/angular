@@ -12,7 +12,7 @@
     <br><br>
 
     <label>Mot de passe : </label>
-    <input type="text" formControlName="Password">
+    <input type="password" formControlName="Password">
     <div style="color : red;" *ngIf="loginForm.get('Password').hasError('required') && loginForm.get('Password').touched">
         il faut un mot de passe
     </div>
