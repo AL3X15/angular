@@ -5,13 +5,17 @@ import { FormulaireEntrepriseComponent } from './formulaire-entreprise/formulair
 import { FormulaireAnnonceComponent } from './formulaire-annonce/formulaire-annonce.component';
 import { AuthorisationGuard } from './guard/authorisation.guard';
 import { PostulationComponent } from './postulation/postulation.component';
-import { SignalementComponent } from './signalement/signalement.component';
 import { ListeAnnonceComponent } from './liste-annonce/liste-annonce.component';
 import { EntrepriseGuard } from './guard/entreprise.guard';
 import { AdministrateurGuard } from './guard/administrateur.guard';
 import { FormulaireAdministrateurComponent } from './formulaire-administrateur/formulaire-administrateur.component';
 import { AffichageProfilComponent } from './affichage-profil/affichage-profil.component';
 import { FormulaireChangelentPasswordComponent } from './formulaire-changelent-password/formulaire-changelent-password.component';
+import { SignalementEntrepriseComponent } from './signalement-entreprise/signalement-entreprise.component';
+import { SignalementEtudiantComponent } from './signalement-etudiant/signalement-etudiant.component';
+import { AffichageSignalementComponent } from './affichage-signalement/affichage-signalement.component';
+import { EntrepriseSignalementResolver } from './resolver/ResolverSignalementEntreprise';
+import { EtudiantSignalementResolver } from './resolver/ResolverSignalementEtudiant';
 
 
 
@@ -31,9 +35,15 @@ const routes: Routes = [
 		component: PostulationComponent,
 		canActivate: [AuthorisationGuard,EntrepriseGuard],
 	},{
-		path: "signalement",
-		component: SignalementComponent,
+		path: "signalement/entreprise",
+		component: SignalementEntrepriseComponent,
 		canActivate: [AuthorisationGuard,AdministrateurGuard],
+		resolve: { page: EntrepriseSignalementResolver }
+	},{
+		path: "signalement/etudiant",
+		component: SignalementEtudiantComponent,
+		canActivate: [AuthorisationGuard,AdministrateurGuard],
+		resolve: { page: EtudiantSignalementResolver }
 	},{
 		path: "administrateurForm",
 		component: FormulaireAdministrateurComponent,
@@ -51,6 +61,10 @@ const routes: Routes = [
 		component: FormulaireChangelentPasswordComponent,
 		canActivate: [AuthorisationGuard],
 	},{
+		path: "signalement/detail",
+		component: AffichageSignalementComponent,
+		canActivate: [AuthorisationGuard,AdministrateurGuard],
+	},{
 		path: "",
 		redirectTo: "/acceuil",
 		pathMatch: "full"
@@ -58,7 +72,12 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+	imports: [RouterModule.forRoot(routes)],
+	exports: [RouterModule],
+	providers: [
+		EntrepriseSignalementResolver,
+		EtudiantSignalementResolver
+	]
 })
+
 export class AppRoutingModule { }

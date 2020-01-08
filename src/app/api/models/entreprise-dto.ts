@@ -5,7 +5,6 @@ export interface EntrepriseDTO {
   id?: number;
   nomResponsable: string;
   numeroBanqueCarrefourEts: string;
-  estPremium?: boolean;
   adresse: AdresseDTO;
   user: UserDTO;
 }

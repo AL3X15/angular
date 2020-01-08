@@ -8,12 +8,14 @@ import { Observable as __Observable } from 'rxjs';
 import { map as __map, filter as __filter } from 'rxjs/operators';
 
 import { EntrepriseDTOPagedResult } from '../models/entreprise-dtopaged-result';
+import { EntrepriseResumeDTOPagedResult } from '../models/entreprise-resume-dtopaged-result';
 import { EntrepriseDTO } from '../models/entreprise-dto';
 @Injectable({
   providedIn: 'root',
 })
 class EntrepriseService extends __BaseService {
   static readonly getPageLignePath = '/page/{ligne}';
+  static readonly getEntrepriseSignalementPageLignePath = '/Entreprise/signalement/page/{ligne}';
   static readonly getEntrepriseIdPath = '/Entreprise/{id}';
   static readonly deleteEntrepriseIdPath = '/Entreprise/{id}';
   static readonly getEntreprisePath = '/Entreprise';
@@ -64,10 +66,46 @@ class EntrepriseService extends __BaseService {
   }
 
   /**
+   * @param ligne undefined
+   * @return Success
+   */
+  getEntrepriseSignalementPageLigneResponse(ligne: number): __Observable<__StrictHttpResponse<EntrepriseResumeDTOPagedResult>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+    let req = new HttpRequest<any>(
+      'GET',
+      this.rootUrl + `/Entreprise/signalement/page/${ligne}`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<EntrepriseResumeDTOPagedResult>;
+      })
+    );
+  }
+  /**
+   * @param ligne undefined
+   * @return Success
+   */
+  getEntrepriseSignalementPageLigne(ligne: number): __Observable<EntrepriseResumeDTOPagedResult> {
+    return this.getEntrepriseSignalementPageLigneResponse(ligne).pipe(
+      __map(_r => _r.body as EntrepriseResumeDTOPagedResult)
+    );
+  }
+
+  /**
    * @param id undefined
    * @return Success
    */
-  getEntrepriseIdResponse(id: number): __Observable<__StrictHttpResponse<EntrepriseDTO>> {
+  getEntrepriseIdResponse(id: string): __Observable<__StrictHttpResponse<EntrepriseDTO>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
@@ -93,7 +131,7 @@ class EntrepriseService extends __BaseService {
    * @param id undefined
    * @return Success
    */
-  getEntrepriseId(id: number): __Observable<EntrepriseDTO> {
+  getEntrepriseId(id: string): __Observable<EntrepriseDTO> {
     return this.getEntrepriseIdResponse(id).pipe(
       __map(_r => _r.body as EntrepriseDTO)
     );

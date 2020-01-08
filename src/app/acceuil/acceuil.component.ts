@@ -32,7 +32,7 @@ export class AcceuilComponent implements OnInit {
 			() => {},
 			() => {
 				if(this.estAdmin)
-					this.router.navigate(['signalement']);
+					this.router.navigate(['signalement/etudiant']);
 				else if(this.estEntreprise)
 					this.router.navigate(['postulation']);
 			});

@@ -1,23 +1,10 @@
 <div *ngIf="estEntreprise">
-    <p>	Nom : {{entreprise.user.nom}}</p>
-    <p> Numero Banque Carrefour Ets : {{entreprise.numeroBanqueCarrefourEts}}</p>
-    <p> Est premium : {{entreprise.estPremium}}</p>
-    <p> Adresse mail : {{entreprise.user.email}}</p>
-    <p> Numero de telephone : {{entreprise.user.phoneNumber}}</p>
-    <p> Nom du responsable : {{entreprise.nomResponsable}}</p>
-    <p> Adresse : </p>
-    <p>	    Route : {{entreprise.adresse.rue}}</p>
-    <p>     Numero : {{entreprise.adresse.numero}}</p>
-    <p>     Code postal : {{entreprise.adresse.localite.codePostal}}</p>
-    <p>     Localite : {{entreprise.adresse.localite.nom}}</p>
+    <app-affichage-entreprise [entreprise]="entreprise"></app-affichage-entreprise>
 </div>
 <div *ngIf="estAdmin">
-    <p>	Nom : {{administrateur.user.nom}}</p>
-    <p> Prenom : {{administrateur.prenom}}</p>
-    <p> Adresse mail : {{administrateur.user.email}}</p>
-    <p> Numero de telephone : {{administrateur.user.phoneNumber}}</p>
+    <app-affichage-administrateur [administrateur]="administrateur"></app-affichage-administrateur>
 </div>
 <br><br>
 <button (click)="modifProfil()">Modifier mon profil</button>
-<br>
+<br><br>
 <button routerLink="/modifPassword">Modifier mon mot de passe</button>

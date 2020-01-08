@@ -42,7 +42,6 @@ export class FormulaireEntrepriseComponent implements OnInit {
 				alert("il faut confirmer le mot de passe");
 		}
 		else{
-			entrepriseNouv.estPremium = this.entreprise.estPremium;
 			entrepriseNouv.user.nbSignalement = this.entreprise.user.nbSignalement;
 			this.serviceEnt.putEntreprise(entrepriseNouv).subscribe(
 				x => this.serviceUser.setEntreprise(x),

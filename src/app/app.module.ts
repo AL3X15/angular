@@ -12,12 +12,17 @@ import { MenuComponent } from './menu/menu.component';
 import { ApiModule } from './api/api.module';
 import { ApiInterceptor } from './ApiInterceptor';
 import { PostulationComponent } from './postulation/postulation.component';
-import { SignalementComponent } from './signalement/signalement.component';
 import { ListeAnnonceComponent } from './liste-annonce/liste-annonce.component';
 import { FormulaireAdministrateurComponent } from './formulaire-administrateur/formulaire-administrateur.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { AffichageProfilComponent } from './affichage-profil/affichage-profil.component';
 import { FormulaireChangelentPasswordComponent } from './formulaire-changelent-password/formulaire-changelent-password.component';
+import { SignalementEntrepriseComponent } from './signalement-entreprise/signalement-entreprise.component';
+import { SignalementEtudiantComponent } from './signalement-etudiant/signalement-etudiant.component';
+import { AffichageEtudiantComponent } from './affichage-etudiant/affichage-etudiant.component';
+import { AffichageEntrepriseComponent } from './affichage-entreprise/affichage-entreprise.component';
+import { AffichageAdministrateurComponent } from './affichage-administrateur/affichage-administrateur.component';
+import { AffichageSignalementComponent } from './affichage-signalement/affichage-signalement.component';
 
 
 export const API_INTERCEPTOR_PROVIDER: Provider = {
@@ -34,11 +39,16 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
 		FormulaireAnnonceComponent,
 		MenuComponent,
 		PostulationComponent,
-		SignalementComponent,
 		ListeAnnonceComponent,
 		FormulaireAdministrateurComponent,
 		AffichageProfilComponent,
-		FormulaireChangelentPasswordComponent
+		FormulaireChangelentPasswordComponent,
+		SignalementEntrepriseComponent,
+		SignalementEtudiantComponent,
+		AffichageEtudiantComponent,
+		AffichageEntrepriseComponent,
+		AffichageAdministrateurComponent,
+		AffichageSignalementComponent
 	],
 	imports: [
 		BrowserModule,

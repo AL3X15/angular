@@ -1,0 +1,12 @@
+<table>
+	<tr>
+		<th>Nom</th>
+		<th>Nombre de signalement</th>
+		<th>Details</th>
+	</tr>
+	<tr *ngFor="let entreprise of page.items">
+		<td>{{entreprise.user.nom}}</td>
+		<td>{{entreprise.user.nbSignalement}}</td>
+	   <td><a (click)="details(entreprise.user.id)">Details</a></td>
+	</tr>
+</table>

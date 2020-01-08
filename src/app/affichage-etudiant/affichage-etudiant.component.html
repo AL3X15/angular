@@ -1,0 +1,16 @@
+<p>	Nom : {{etudiant.user.nom}}</p>
+<p> Prenom : {{etudiant.prenom}}</p>
+<p> Sexe : {{etudiant.sexe}}</p>
+<p> Numero de registre national : {{etudiant.registreNational}}</p>
+<p> Date d'expiration du badge : {{etudiant.expirationBadge}}</p>
+<p> Adresse mail : {{etudiant.user.email}}</p>
+<p> Numero de telephone : {{etudiant.user.phoneNumber}}</p>
+<p> Adresse : </p>
+<p>	    Route : {{etudiant.adresse.rue}}</p>
+<p>     Numero : {{etudiant.adresse.numero}}</p>
+<p>     Code postal : {{etudiant.adresse.localite.codePostal}}</p>
+<p>     Localite : {{etudiant.adresse.localite.nom}}</p>
+<p> Tags : </p>
+    <div *ngFor="let tag of etudiant.tags">
+        <p>{{tag.nom}}</p>
+    </div>

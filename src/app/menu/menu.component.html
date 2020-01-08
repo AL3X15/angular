@@ -4,7 +4,7 @@
 		<a class="navbar-brand" style="color: white;" routerLink="postulation">Jober</a>
 	</div>
 	<div *ngIf="estAdmin">
-		<a class="navbar-brand" style="color: white;" routerLink="signalement">Jober</a>
+		<a class="navbar-brand" style="color: white;" routerLink="signalement/etudiant">Jober</a>
 	</div>
 	
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,6 +30,13 @@
 			</div>
 			
 			<div *ngIf="estAdmin">
+				<li ngbDropdown class="nav-item dropdown show">
+					<a ngbDropdownToggle class="nav-link dropdown-toggle show"  id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Signalement</a>
+					<div ngbDropdownMenu class="dropdown-menu show" aria-labelledby="dropdown01">
+						<a class="dropdown-item" routerLink="signalement/etudiant">Consulter les signalement d'etudiant</a>
+						<a class="dropdown-item" routerLink="signalement/entreprise">Consulter les signalement d'entreprise</a>
+					</div>
+				</li>
 				<li ngbDropdown class="nav-item dropdown show">
 					<a ngbDropdownToggle class="nav-link dropdown-toggle show"  id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Administrateur</a>
 					<div ngbDropdownMenu class="dropdown-menu show" aria-labelledby="dropdown01">

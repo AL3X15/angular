@@ -9,6 +9,7 @@ import { EntrepriseService } from './services/entreprise.service';
 import { EtudiantService } from './services/etudiant.service';
 import { FaqService } from './services/faq.service';
 import { JwtService } from './services/jwt.service';
+import { PasswordService } from './services/password.service';
 import { PostulationService } from './services/postulation.service';
 import { TagService } from './services/tag.service';
 
@@ -31,6 +32,7 @@ import { TagService } from './services/tag.service';
     EtudiantService,
     FaqService,
     JwtService,
+    PasswordService,
     PostulationService,
     TagService
   ],
