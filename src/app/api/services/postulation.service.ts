@@ -107,7 +107,7 @@ class PostulationService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'POST',
-      this.rootUrl + `/Postulation/${id}`,
+      this.rootUrl + `/Postulation/${Id}`,
       __body,
       {
         headers: __headers,

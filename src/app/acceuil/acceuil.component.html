@@ -1,6 +1,7 @@
 <h4>Se connecter</h4>
 
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
     <label>Email : </label>
     <input type="email" formControlName="UserName">
     <div style="color : red;" *ngIf="loginForm.get('UserName').hasError('required') && loginForm.get('UserName').touched">
@@ -18,6 +19,7 @@
     </div>
     <br><br>
     <button type="submit" [disabled]="!loginForm.valid">Submit</button>
+    
 </form>
 
 <h4>S'inscrire</h4>

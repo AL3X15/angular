@@ -1,1 +1,18 @@
-<p>liste-annonce works!</p>
+<h4 *ngIf="page === undefined || page.totalCount == 0">Pas de résultat</h4>
+<div *ngIf="page !== undefined && page.totalCount != 0">
+	<table>
+		<tr>
+			<th>Poste</th>
+			<th>Details</th>
+		</tr>
+		<tr *ngFor="let annonce of page.items">
+			<td>{{annonce.poste}}</td>
+		   <td><a (click)="details(annonce.id)">Details</a></td>
+		</tr>
+	</table>
+	<footer>
+		<button *ngIf="page.pageIndex-1 > 0" (click)="precedent()">Precedent</button>
+		<p>{{page.pageIndex}}/{{nbPages}}</p>
+		<button *ngIf="page.pageIndex+1 <= nbPages" (click)="suivant()">Suivant</button>
+	</footer>
+</div>

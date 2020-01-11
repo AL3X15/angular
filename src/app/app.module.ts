@@ -23,6 +23,7 @@ import { AffichageEtudiantComponent } from './affichage-etudiant/affichage-etudi
 import { AffichageEntrepriseComponent } from './affichage-entreprise/affichage-entreprise.component';
 import { AffichageAdministrateurComponent } from './affichage-administrateur/affichage-administrateur.component';
 import { AffichageSignalementComponent } from './affichage-signalement/affichage-signalement.component';
+import { AffichageAnnonceComponent } from './affichage-annonce/affichage-annonce.component';
 
 
 export const API_INTERCEPTOR_PROVIDER: Provider = {
@@ -48,7 +49,8 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
 		AffichageEtudiantComponent,
 		AffichageEntrepriseComponent,
 		AffichageAdministrateurComponent,
-		AffichageSignalementComponent
+		AffichageSignalementComponent,
+		AffichageAnnonceComponent
 	],
 	imports: [
 		BrowserModule,
@@ -58,6 +60,7 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
 		ReactiveFormsModule,
 		NoopAnimationsModule,
 		ApiModule.forRoot({rootUrl : "http://localhost:5000"})
+		//ApiModule.forRoot({rootUrl : "https://smartcityjober.azurewebsites.net"})
 	],
 	providers: [ApiInterceptor,
 		API_INTERCEPTOR_PROVIDER],

@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { AnnonceService } from '../api/services';
+import { AnnonceDTO, GroupeTagDTO, TagDTO } from '../api/models';
+import { TagsService } from '../service/tags.service';
+import { AnnonceSelectioneeService } from '../service/annonce-selectionee.service';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -8,78 +13,48 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
   styleUrls: ['./formulaire-annonce.component.css']
 })
 export class FormulaireAnnonceComponent implements OnInit {
-/*
-	constructor(private formBuilder: FormBuilder, private serviceAnnonce : AnnonceService, private serviceTag : TagService) {
-		if(this.selectedEnterpriseId != undefined && this.selectedAnnonceId != undefined){
-			serviceAnnonce.get(this.selectedAnnonceId, this.selectedEnterpriseId).subscribe(
-				an => this.annonce = an,
-				() => console.log("error"),
-				() => this.RemplissageForm() );
-			this.estCréation = false;
-		}
-		this.AffectaionTags();
+
+	constructor(private formBuilder: FormBuilder, private serviceAnnonce : AnnonceService, private serviceTag : TagsService, private annonceSelectionnee : AnnonceSelectioneeService, private route : ActivatedRoute) {}
+
+	ngOnInit(){
+		this.formulaireCreation();
+		if(this.serviceTag.getTags() === undefined)
+			this.serviceTag.setTags(this.route.snapshot.data.tags);
+		this.langues = this.serviceTag.getTags().find(x => x.nom == "langues");
+		this.secteurs = this.serviceTag.getTags().find(x => x.nom == "secteurs");
+	}
 	
+	langues : GroupeTagDTO;
+	secteurs : GroupeTagDTO;
+	annonceForm : FormGroup;
+
+	onSubmit(){
+		let annonceNouv = this.annonceForm.value;
+		annonceNouv.tags = new Array<TagDTO>();
+		annonceNouv.tags.push(this.langues.tags.find(x => x.nom == this.annonceForm.get("langue").value))
+		annonceNouv.tags.push(this.secteurs.tags.find(x => x.nom == this.annonceForm.get("secteur").value))
+		console.log(annonceNouv)
+		this.serviceAnnonce.postAnnonce(this.annonceForm.value).subscribe();
+	}
+
+
+	formulaireCreation(){
 		this.annonceForm = this.formBuilder.group({
 			poste : ['', Validators.required],
 			dateDebut : ['', Validators.required],
 			dateFin : ['', Validators.required],
-			paye : ['', Validators.required],
-			region : [''],
-			langue : [''],
-			secteur : [''],
+			paie : ['', Validators.required],
+			adresse : this.formBuilder.group({
+				rue : ['', Validators.required],
+				numero : ['', Validators.required],
+				localite : this.formBuilder.group({
+					codePostal : ['', Validators.compose([Validators.required, Validators.pattern("\\d{4}")])],
+					nom : ['', Validators.required]
+				}),
+			}),
+			langue : ['', Validators.required],
+			secteur : ['', Validators.required],
 		}); 
 	}
-*/
-  	ngOnInit() {
-	}/*
-	estCréation : boolean = true;
-	annonceForm : FormGroup;
-	annonce : Annonce;
-	selectedEnterpriseId : number;
-	selectedAnnonceId : number;
-	regions : Array<Tag>;
-	langues : Array<Tag>;
-	secteurs : Array<Tag>;
-	
-	onSubmit(){
-		if(this.estCréation)
-			this.serviceAnnonce.post(this.selectedEnterpriseId, this.annonceForm.value).subscribe();
-		else
-			this.serviceAnnonce.uptdate(this.selectedEnterpriseId, this.annonceForm.value, this.annonce).subscribe();
-	}
 
-	RemplissageForm(){
-		
-		this.annonceForm.setValue({
-			poste :  this.annonce.poste,
-			dateDebut :  this.annonce.dateDebut,
-			dateFin :  this.annonce.dateFin,
-			paye :  this.annonce.paye,
-			region :  this.annonce.tags.find(tag => tag.groupe == "region"),
-			langue :  this.annonce.tags.find(tag => tag.groupe == "langue"),
-			secteur :  this.annonce.tags.find(tag => tag.groupe == "secteur"),
-		});
-	}
-
-	AffectaionTags(){
-		this.regions = new Array<Tag>();
-		this.langues = new Array<Tag>();
-		this.secteurs = new Array<Tag>();
-
-		for(let tag of this.serviceTag.tags){
-			switch (tag.groupe) {
-				case "region":
-					this.regions.push(tag);
-					break;
-				case "langue":
-					this.langues.push(tag);
-					break;
-				case "secteur":
-					this.secteurs.push(tag);
-					break;
-				default:
-					break;
-			}
-		}
-	}*/
 }

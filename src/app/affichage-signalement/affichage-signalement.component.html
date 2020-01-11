@@ -4,3 +4,11 @@
 <div *ngIf="etudiant !== null">
     <app-affichage-etudiant [etudiant]="etudiant"></app-affichage-etudiant>
 </div>
+
+<br><br>
+
+<button (click)="reset()">Remettre le nombre de signalement à 0</button>
+
+<br><br>
+
+<button (click)="supprimer()">Supprimer</button>

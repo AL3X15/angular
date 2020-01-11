@@ -14,8 +14,11 @@ import { FormulaireChangelentPasswordComponent } from './formulaire-changelent-p
 import { SignalementEntrepriseComponent } from './signalement-entreprise/signalement-entreprise.component';
 import { SignalementEtudiantComponent } from './signalement-etudiant/signalement-etudiant.component';
 import { AffichageSignalementComponent } from './affichage-signalement/affichage-signalement.component';
-import { EntrepriseSignalementResolver } from './resolver/ResolverSignalementEntreprise';
-import { EtudiantSignalementResolver } from './resolver/ResolverSignalementEtudiant';
+import { EntrepriseSignalementResolver } from './resolver/EntrepriseSignalementResolver';
+import { EtudiantSignalementResolver } from './resolver/EtudiantSignalementResolver';
+import { TagsResolver } from './resolver/tagsResolver';
+import { AnnonceResolver } from './resolver/AnnonceResolver';
+import { AffichageAnnonceComponent } from './affichage-annonce/affichage-annonce.component';
 
 
 
@@ -27,10 +30,15 @@ const routes: Routes = [
 		path: "entrepriseForm",
 		component: FormulaireEntrepriseComponent,
 	},{
-		path: "annonce",
+		path: "annonceForm",
 		component: FormulaireAnnonceComponent,
 		canActivate: [AuthorisationGuard,EntrepriseGuard],
+		resolve: { tags : TagsResolver}
 	},{
+		path: "annonce",
+		component: AffichageAnnonceComponent,
+		canActivate: [AuthorisationGuard,EntrepriseGuard],
+	},{		
 		path: "postulation",
 		component: PostulationComponent,
 		canActivate: [AuthorisationGuard,EntrepriseGuard],
@@ -52,6 +60,7 @@ const routes: Routes = [
 		path: "mesAnnonces",
 		component: ListeAnnonceComponent,
 		canActivate: [AuthorisationGuard,EntrepriseGuard],
+		resolve: { page : AnnonceResolver }
 	},{
 		path: "profil",
 		component: AffichageProfilComponent,
@@ -76,7 +85,10 @@ const routes: Routes = [
 	exports: [RouterModule],
 	providers: [
 		EntrepriseSignalementResolver,
-		EtudiantSignalementResolver
+		EtudiantSignalementResolver,
+		AnnonceResolver,
+		TagsResolver
+
 	]
 })
 

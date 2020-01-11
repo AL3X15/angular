@@ -11,7 +11,7 @@ import { AdministrateurDTO } from '../api/models';
 	styleUrls: ['./formulaire-administrateur.component.css']
 })
 export class FormulaireAdministrateurComponent implements OnInit {
-
+	//TODO différencier la création et la modification
 	constructor(private formBuilder: FormBuilder, private serviceAdmin : AdministrateurService, private serviceUser : UtilisateurService, private router: Router) { }
 
 	ngOnInit() {

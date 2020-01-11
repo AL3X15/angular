@@ -5,7 +5,7 @@
 	<div style="color : red;" *ngIf="annonceForm.get('poste').hasError('required') && annonceForm.get('poste').touched">
 		il faut un poste
 	</div>
-	<br><br>
+	<br><br> 
 
 	<label>Date De début : </label>
 	<input type="date" formControlName="dateDebut">
@@ -22,33 +22,62 @@
 	<br><br>
 
 	<label>Paye : </label>
-	<input type="number" formControlName="paye">
-	<div style="color : red;" *ngIf="annonceForm.get('paye').hasError('required') && annonceForm.get('paye').touched">
+	<input type="number" formControlName="paie">
+	<div style="color : red;" *ngIf="annonceForm.get('paie').hasError('required') && annonceForm.get('paie').touched">
 		il faut une paye
 	</div>
 	<br><br>
 
-	<label>Région : </label>
-	<select formControlName="region">
-		<div *ngFor="let region of regions">
-			<option value="{{region}}">{{region}}</option>
+	<div formGroupName="adresse">	
+		<label>Route : </label>
+		<input type="text" formControlName="rue">
+		<div style="color : red;" *ngIf="annonceForm.get('adresse.rue').hasError('required') && annonceForm.get('adresse.rue').touched">
+			il faut une route
 		</div>
-	</select>
-	<br><br>
+		<br><br>
 
-	<label>Langue : </label>
-	<select formControlName="langue">
-		<div *ngFor="let langue of langues">
-			<option value="{{langue}}">{{langue}}</option>
+		<label>Numero : </label>
+		<input type="text" formControlName="numero">
+		<div style="color : red;" *ngIf="annonceForm.get('adresse.numero').hasError('required') && annonceForm.get('adresse.numero').touched">
+			il faut un numero
 		</div>
+		<br><br>
+
+		<div formGroupName="localite">
+			<label>Code postal : </label>
+			<input type="text" formControlName="codePostal">
+			<div style="color : red;" *ngIf="annonceForm.get('adresse.localite.codePostal').hasError('required') && annonceForm.get('adresse.localite.codePostal').touched">
+				il faut un code postal
+			</div>
+			<div style="color : red;" *ngIf="annonceForm.get('adresse.localite.codePostal').hasError('pattern') && annonceForm.get('adresse.localite.codePostal').touched">
+				code postal non valide
+			</div>
+			<br><br>
+
+			<label>Nom localite : </label>
+			<input type="text" formControlName="nom">
+			<div style="color : red;" *ngIf="annonceForm.get('adresse.localite.nom').hasError('required') && annonceForm.get('adresse.localite.nom').touched">
+				il faut un nom de localite
+			</div>
+			<br><br>
+		</div>
+	</div>
+
+
+
+	<label>Langues : </label>
+	<select formControlName="langue">
+		<option *ngFor="let langue of langues.tags" [value]="langue.nom">
+			{{langue.nom}}
+		</option>
 	</select>
 	<br><br>
 
 	<label>Secteur : </label>
 	<select formControlName="secteur">
-		<div *ngFor="let secteur of secteurs">
-			<option value="{{secteur}}">{{secteur}}</option>
-		</div>
+		<option *ngFor="let secteur of secteurs.tags" [value]="secteur.nom">
+			{{secteur.nom}}
+		</option>
 	</select>
 	<br><br>
 

@@ -1,0 +1,15 @@
+<p>	Poste : {{annonce.poste}}</p>
+<p>	Date de début : {{annonce.dateDebut}}</p>
+<p>	Date de fin : {{annonce.dateFin}}</p>
+<p>	Paie : {{annonce.paie}}</p>
+<p>	Adresse : </p>
+<p>		Route : {{annonce.adresse.rue}}</p>
+<p>		Numero : {{annonce.adresse.numero}}</p>
+<p>		Code postal : {{annonce.adresse.localite.codePostal}}</p>
+<p>		Localite : {{annonce.adresse.localite.nom}}</p>
+<p>	Tags : </p>
+<div *ngFor="let tag of annonce.tags">
+	<p>{{tag.nom}}</p>
+</div>
+
+<button (click)="supression()">Supression</button>

@@ -10,6 +10,6 @@ export class EtudiantSignalementResolver implements Resolve<EtudiantResumeDTOPag
 	constructor(private service : EtudiantService){}
 
 	resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any>|Promise<any>|any {
-		return this.service.getEtudiantSignalementPageLigne(1);
+		return this.service.getEtudiantSignalementLigne(1);
 	}
 }

@@ -81,14 +81,14 @@ export class FormulaireEntrepriseComponent implements OnInit {
 				rue : [this.entreprise.adresse.rue, Validators.required],
 				numero : [this.entreprise.adresse.numero, Validators.required],
 				localite : this.formBuilder.group({
-					codePostal : ['', Validators.compose([Validators.required, Validators.pattern("\\d{4}")])],
-					nom : ['', Validators.required]
+					codePostal : [this.entreprise.adresse.localite.codePostal, Validators.compose([Validators.required, Validators.pattern("\\d{4}")])],
+					nom : [this.entreprise.adresse.localite.nom, Validators.required]
 				}),
 			}),
 			user : this.formBuilder.group({
-				nom : ['', Validators.required],
-				phoneNumber : ['', Validators.compose([Validators.required, Validators.pattern("0\\d{3}(\\d{2}){3}")])],
-				email : ['', Validators.compose([Validators.required, Validators.pattern(".+@.+\..+")])],
+				nom : [this.entreprise.user.nom, Validators.required],
+				phoneNumber : [this.entreprise.user.phoneNumber, Validators.compose([Validators.required, Validators.pattern("0\\d{3}(\\d{2}){3}")])],
+				email : [this.entreprise.user.email, Validators.compose([Validators.required, Validators.pattern(".+@.+\..+")])],
 			})
 		}); 
 	}

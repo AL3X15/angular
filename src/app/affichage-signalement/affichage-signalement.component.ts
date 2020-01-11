@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { EntrepriseDTO, EtudiantDTO } from '../api/models';
 import { EtudiantService, EntrepriseService } from '../api/services';
 import { SignalementService } from '../service/signalement.service';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-affichage-signalement',
@@ -10,7 +11,7 @@ import { SignalementService } from '../service/signalement.service';
 })
 export class AffichageSignalementComponent implements OnInit {
 
-	constructor(private serviceEtu : EtudiantService, private serviceEnt : EntrepriseService, private service : SignalementService) { }
+	constructor(private serviceEtu : EtudiantService, private serviceEnt : EntrepriseService, private service : SignalementService, private router : Router) { }
 
 	ngOnInit() {
 		this.entreprise = this.service.getEntreprise();
@@ -19,4 +20,30 @@ export class AffichageSignalementComponent implements OnInit {
 	
 	entreprise : EntrepriseDTO;
 	etudiant : EtudiantDTO;
+
+	reset(){
+		if(this.entreprise !== undefined)
+			this.serviceEnt.putEntrepriseId(this.entreprise.user.id).subscribe(
+				() => {},
+				() => {},
+				() => this.router.navigate(["signalement/entreprise"]));
+		else
+			this.serviceEtu.putEtudiantId(this.etudiant.user.id).subscribe(
+				() => {},
+				() => {},
+				() => this.router.navigate(["signalement/etudiant"]));
+	}
+
+	supprimer(){
+		if(this.entreprise !== undefined)
+			this.serviceEnt.deleteEntrepriseId(this.entreprise.id).subscribe(
+				() => {},
+				() => {},
+				() => this.router.navigate(["signalement/entreprise"]));
+		else
+			this.serviceEtu.deleteEtudiantId(this.etudiant.id).subscribe(
+				() => {},
+				() => {},
+				() => this.router.navigate(["signalement/etudiant"]));
+	}
 }

@@ -26,11 +26,29 @@ export class ApiInterceptor implements HttpInterceptor {
         return next.handle(req).pipe(
             tap(x => x, err => {
                 // Handle this err
-                //TODO intercepter les erreurs
-
-                //if(err.status == 401)
-                //    alert("pas authentifié");
-                console.log(err);
+                switch (err.status) {
+                    case 400:
+                        alert(err.error);
+                        break;
+                    case 401:
+                        alert("non identifié");
+                        break;
+                    case 403:
+                        alert("acces interdit");
+                        break;
+                    case 404: 
+                        alert("pas trouvé");
+                        break;
+                    case 409:
+                        alert("risque d'acces concurent");
+                        break;
+                    case 500:
+                        alert("erreur server");
+                        break;
+                    default:
+                        alert("erreur inconue");
+                        break;
+                }
             })
         );
     }

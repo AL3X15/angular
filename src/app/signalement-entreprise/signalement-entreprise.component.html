@@ -1,12 +1,20 @@
-<table>
-	<tr>
-		<th>Nom</th>
-		<th>Nombre de signalement</th>
-		<th>Details</th>
-	</tr>
-	<tr *ngFor="let entreprise of page.items">
-		<td>{{entreprise.user.nom}}</td>
-		<td>{{entreprise.user.nbSignalement}}</td>
-	   <td><a (click)="details(entreprise.user.id)">Details</a></td>
-	</tr>
-</table>
+<h4 *ngIf="page === undefined || page.totalCount == 0">Pas de résultat</h4>
+<div *ngIf="page !== undefined && page.totalCount != 0">
+	<table>
+		<tr>
+			<th>Nom</th>
+			<th>Nombre de signalement</th>
+			<th>Details</th>
+		</tr>
+		<tr *ngFor="let entreprise of page.items">
+			<td>{{entreprise.user.nom}}</td>
+			<td>{{entreprise.user.nbSignalement}}</td>
+		   <td><a (click)="details(entreprise.user.id)">Details</a></td>
+		</tr>
+	</table>
+	<footer>
+		<button *ngIf="page.pageIndex-1 > 0" (click)="precedent()">Precedent</button>
+		<p>{{page.pageIndex}}/{{nbPages}}</p>
+		<button *ngIf="page.pageIndex+1 <= nbPages" (click)="suivant()">Suivant</button>
+	</footer>
+</div>

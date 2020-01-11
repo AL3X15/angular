@@ -11,6 +11,6 @@ export class EntrepriseSignalementResolver implements Resolve<EntrepriseResumeDT
 	constructor(private service : EntrepriseService){}
 
 	resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any>|Promise<any>|any {
-		return this.service.getEntrepriseSignalementPageLigne(1);
+		return this.service.getEntrepriseSignalementLigne(1);
 	}
 }
