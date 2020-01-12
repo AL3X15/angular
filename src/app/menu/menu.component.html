@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-white">
 	<img src="../assets/logo.png"  width="50" height="50" id="pictureNavBar">
 	<div *ngIf="estEntreprise">
-		<a class="navbar-brand" style="color: white;" routerLink="postulation">Jober</a>
+		<a class="navbar-brand" style="color: white;" routerLink="postulations">Jober</a>
 	</div>
 	<div *ngIf="estAdmin">
 		<a class="navbar-brand" style="color: white;" routerLink="signalement/etudiant">Jober</a>
@@ -24,7 +24,7 @@
 				<li ngbDropdown class="nav-item dropdown show">
 					<a ngbDropdownToggle class="nav-link dropdown-toggle show"  id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Postulation</a>
 					<div ngbDropdownMenu class="dropdown-menu show" aria-labelledby="dropdown01">
-						<a class="dropdown-item" routerLink="/postulation" >Consulter les postulations</a>
+						<a class="dropdown-item" routerLink="/postulations" >Consulter les postulations</a>
 					</div>
 				</li>
 			</div>
@@ -40,7 +40,7 @@
 				<li ngbDropdown class="nav-item dropdown show">
 					<a ngbDropdownToggle class="nav-link dropdown-toggle show"  id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Administrateur</a>
 					<div ngbDropdownMenu class="dropdown-menu show" aria-labelledby="dropdown01">
-						<a class="dropdown-item" routerLink="administrateurForm">Ajouter un administrateur</a>
+						<a class="dropdown-item" (click)="ajoutAdmin()">Ajouter un administrateur</a>
 					</div>
 				</li>
 			</div>

@@ -11,7 +11,6 @@ import { FormulaireAnnonceComponent } from './formulaire-annonce/formulaire-anno
 import { MenuComponent } from './menu/menu.component';
 import { ApiModule } from './api/api.module';
 import { ApiInterceptor } from './ApiInterceptor';
-import { PostulationComponent } from './postulation/postulation.component';
 import { ListeAnnonceComponent } from './liste-annonce/liste-annonce.component';
 import { FormulaireAdministrateurComponent } from './formulaire-administrateur/formulaire-administrateur.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
@@ -24,6 +23,11 @@ import { AffichageEntrepriseComponent } from './affichage-entreprise/affichage-e
 import { AffichageAdministrateurComponent } from './affichage-administrateur/affichage-administrateur.component';
 import { AffichageSignalementComponent } from './affichage-signalement/affichage-signalement.component';
 import { AffichageAnnonceComponent } from './affichage-annonce/affichage-annonce.component';
+import { AffichagePostulationComponent } from './affichage-postulation/affichage-postulation.component';
+import { ListePostulationComponent } from './liste-postulation/liste-postulation.component';
+import { DetailAnnonceComponent } from './detail-annonce/detail-annonce.component';
+import { AffichageAdresseComponent } from './affichage-adresse/affichage-adresse.component';
+import { AffichageTagsComponent } from './affichage-tags/affichage-tags.component';
 
 
 export const API_INTERCEPTOR_PROVIDER: Provider = {
@@ -39,7 +43,6 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
 		FormulaireEntrepriseComponent,
 		FormulaireAnnonceComponent,
 		MenuComponent,
-		PostulationComponent,
 		ListeAnnonceComponent,
 		FormulaireAdministrateurComponent,
 		AffichageProfilComponent,
@@ -50,7 +53,12 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
 		AffichageEntrepriseComponent,
 		AffichageAdministrateurComponent,
 		AffichageSignalementComponent,
-		AffichageAnnonceComponent
+		AffichageAnnonceComponent,
+		AffichagePostulationComponent,
+		ListePostulationComponent,
+		DetailAnnonceComponent,
+		AffichageAdresseComponent,
+		AffichageTagsComponent
 	],
 	imports: [
 		BrowserModule,
@@ -59,8 +67,8 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
 		HttpClientModule,
 		ReactiveFormsModule,
 		NoopAnimationsModule,
-		ApiModule.forRoot({rootUrl : "http://localhost:5000"})
-		//ApiModule.forRoot({rootUrl : "https://smartcityjober.azurewebsites.net"})
+		//ApiModule.forRoot({rootUrl : "http://localhost:5000"})
+		ApiModule.forRoot({rootUrl : "https://smartcityjober.azurewebsites.net"})
 	],
 	providers: [ApiInterceptor,
 		API_INTERCEPTOR_PROVIDER],

@@ -1,0 +1,20 @@
+<h3>Annonce</h3>
+<app-affichage-annonce [annonce]="postulation.annonce"></app-affichage-annonce>
+<br>
+<h3>Etudiant</h3>
+<app-affichage-etudiant [etudiant]="postulation.etudiant"></app-affichage-etudiant>
+
+<br><br>
+
+<button (click)="changerEtat()">
+    <div *ngIf="!postulation.estAccepte">
+        Accepter
+    </div>
+    <div *ngIf="postulation.estAccepte">
+        Mettre en attente
+    </div>
+</button>
+
+<br><br>
+
+<button (click)="refuser()">Refuser</button>

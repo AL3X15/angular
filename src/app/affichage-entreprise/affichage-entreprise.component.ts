@@ -2,17 +2,17 @@ import { Component, OnInit, Input } from '@angular/core';
 import { EntrepriseDTO } from '../api/models';
 
 @Component({
-  selector: 'app-affichage-entreprise',
-  templateUrl: './affichage-entreprise.component.html',
-  styleUrls: ['./affichage-entreprise.component.css']
+	selector: 'app-affichage-entreprise',
+	templateUrl: './affichage-entreprise.component.html',
+	styleUrls: ['./affichage-entreprise.component.css']
 })
 export class AffichageEntrepriseComponent implements OnInit {
 
-  constructor() { }
+	constructor() { }
 
-  ngOnInit() {
-  }
+	ngOnInit() {
+	}
 
-  @Input() entreprise : EntrepriseDTO
+	@Input() entreprise : EntrepriseDTO
 
 }

@@ -19,4 +19,6 @@ export { FaqDTO } from './models/faq-dto';
 export { LoginDTO } from './models/login-dto';
 export { PasswordDTO } from './models/password-dto';
 export { PostulationDTO } from './models/postulation-dto';
+export { PostulationResumeDTO } from './models/postulation-resume-dto';
+export { PostulationResumeDTOPagedResult } from './models/postulation-resume-dtopaged-result';
 export { GroupeTagDTO } from './models/groupe-tag-dto';

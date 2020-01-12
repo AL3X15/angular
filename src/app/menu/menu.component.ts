@@ -26,10 +26,6 @@ export class MenuComponent implements OnInit {
 		this.router.navigate(['acceuil']);
 	}
 
-	formulaireAdmin(){
-		this.router.navigate(['administrateurForm']);
-	}
-
 	voirProfil(){
 		if(this.estAdmin){
 			this.serviceAdmin.getAdministrateur().subscribe(
@@ -42,6 +38,11 @@ export class MenuComponent implements OnInit {
 				() => {},
 				() => this.router.navigate(["profil"]));
 		}
+	}
+
+	ajoutAdmin(){
+		this.userService.setAdministrateur(null);
+		this.router.navigate(['administrateurForm']);
 	}
 
 }

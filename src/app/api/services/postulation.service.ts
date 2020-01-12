@@ -7,18 +7,19 @@ import { StrictHttpResponse as __StrictHttpResponse } from '../strict-http-respo
 import { Observable as __Observable } from 'rxjs';
 import { map as __map, filter as __filter } from 'rxjs/operators';
 
-import { AnnonceDTO } from '../models/annonce-dto';
-import { EtudiantDTO } from '../models/etudiant-dto';
 import { PostulationDTO } from '../models/postulation-dto';
+import { PostulationResumeDTOPagedResult } from '../models/postulation-resume-dtopaged-result';
 @Injectable({
   providedIn: 'root',
 })
 class PostulationService extends __BaseService {
-  static readonly getPostulationPath = '/Postulation';
-  static readonly getPostulationIdPath = '/Postulation/id';
-  static readonly postPostulationIdPath = '/Postulation/{Id}';
+  static readonly getPostulationIdPath = '/Postulation/{id}';
   static readonly putPostulationIdPath = '/Postulation/{id}';
   static readonly deletePostulationIdPath = '/Postulation/{id}';
+  static readonly getPostulationMesPostulationsLignePath = '/Postulation/mesPostulations/{ligne}';
+  static readonly getPostulationPostulationsLignePath = '/Postulation/postulations/{ligne}';
+  static readonly getPostulationIdLignePath = '/Postulation/{id}/{ligne}';
+  static readonly postPostulationIdPath = '/Postulation/{Id}';
 
   constructor(
     config: __Configuration,
@@ -28,86 +29,17 @@ class PostulationService extends __BaseService {
   }
 
   /**
+   * @param id undefined
    * @return Success
    */
-  getPostulationResponse(): __Observable<__StrictHttpResponse<Array<AnnonceDTO>>> {
+  getPostulationIdResponse(id: number): __Observable<__StrictHttpResponse<PostulationDTO>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
+
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/Postulation`,
-      __body,
-      {
-        headers: __headers,
-        params: __params,
-        responseType: 'json'
-      });
-
-    return this.http.request<any>(req).pipe(
-      __filter(_r => _r instanceof HttpResponse),
-      __map((_r) => {
-        return _r as __StrictHttpResponse<Array<AnnonceDTO>>;
-      })
-    );
-  }
-  /**
-   * @return Success
-   */
-  getPostulation(): __Observable<Array<AnnonceDTO>> {
-    return this.getPostulationResponse().pipe(
-      __map(_r => _r.body as Array<AnnonceDTO>)
-    );
-  }
-
-  /**
-   * @param id undefined
-   * @return Success
-   */
-  getPostulationIdResponse(id?: number): __Observable<__StrictHttpResponse<Array<EtudiantDTO>>> {
-    let __params = this.newParams();
-    let __headers = new HttpHeaders();
-    let __body: any = null;
-    if (id != null) __params = __params.set('id', id.toString());
-    let req = new HttpRequest<any>(
-      'GET',
-      this.rootUrl + `/Postulation/id`,
-      __body,
-      {
-        headers: __headers,
-        params: __params,
-        responseType: 'json'
-      });
-
-    return this.http.request<any>(req).pipe(
-      __filter(_r => _r instanceof HttpResponse),
-      __map((_r) => {
-        return _r as __StrictHttpResponse<Array<EtudiantDTO>>;
-      })
-    );
-  }
-  /**
-   * @param id undefined
-   * @return Success
-   */
-  getPostulationId(id?: number): __Observable<Array<EtudiantDTO>> {
-    return this.getPostulationIdResponse(id).pipe(
-      __map(_r => _r.body as Array<EtudiantDTO>)
-    );
-  }
-
-  /**
-   * @param id undefined
-   * @return Success
-   */
-  postPostulationIdResponse(id: number): __Observable<__StrictHttpResponse<PostulationDTO>> {
-    let __params = this.newParams();
-    let __headers = new HttpHeaders();
-    let __body: any = null;
-
-    let req = new HttpRequest<any>(
-      'POST',
-      this.rootUrl + `/Postulation/${Id}`,
+      this.rootUrl + `/Postulation/${id}`,
       __body,
       {
         headers: __headers,
@@ -126,8 +58,8 @@ class PostulationService extends __BaseService {
    * @param id undefined
    * @return Success
    */
-  postPostulationId(id: number): __Observable<PostulationDTO> {
-    return this.postPostulationIdResponse(id).pipe(
+  getPostulationId(id: number): __Observable<PostulationDTO> {
+    return this.getPostulationIdResponse(id).pipe(
       __map(_r => _r.body as PostulationDTO)
     );
   }
@@ -201,9 +133,172 @@ class PostulationService extends __BaseService {
       __map(_r => _r.body as null)
     );
   }
+
+  /**
+   * @param ligne undefined
+   * @return Success
+   */
+  getPostulationMesPostulationsLigneResponse(ligne: number): __Observable<__StrictHttpResponse<PostulationResumeDTOPagedResult>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+    let req = new HttpRequest<any>(
+      'GET',
+      this.rootUrl + `/Postulation/mesPostulations/${ligne}`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<PostulationResumeDTOPagedResult>;
+      })
+    );
+  }
+  /**
+   * @param ligne undefined
+   * @return Success
+   */
+  getPostulationMesPostulationsLigne(ligne: number): __Observable<PostulationResumeDTOPagedResult> {
+    return this.getPostulationMesPostulationsLigneResponse(ligne).pipe(
+      __map(_r => _r.body as PostulationResumeDTOPagedResult)
+    );
+  }
+
+  /**
+   * @param ligne undefined
+   * @return Success
+   */
+  getPostulationPostulationsLigneResponse(ligne: number): __Observable<__StrictHttpResponse<PostulationResumeDTOPagedResult>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+    let req = new HttpRequest<any>(
+      'GET',
+      this.rootUrl + `/Postulation/postulations/${ligne}`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<PostulationResumeDTOPagedResult>;
+      })
+    );
+  }
+  /**
+   * @param ligne undefined
+   * @return Success
+   */
+  getPostulationPostulationsLigne(ligne: number): __Observable<PostulationResumeDTOPagedResult> {
+    return this.getPostulationPostulationsLigneResponse(ligne).pipe(
+      __map(_r => _r.body as PostulationResumeDTOPagedResult)
+    );
+  }
+
+  /**
+   * @param params The `PostulationService.GetPostulationIdLigneParams` containing the following parameters:
+   *
+   * - `ligne`:
+   *
+   * - `id`:
+   *
+   * @return Success
+   */
+  getPostulationIdLigneResponse(params: PostulationService.GetPostulationIdLigneParams): __Observable<__StrictHttpResponse<PostulationResumeDTOPagedResult>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+
+    let req = new HttpRequest<any>(
+      'GET',
+      this.rootUrl + `/Postulation/${params.id}/${params.ligne}`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<PostulationResumeDTOPagedResult>;
+      })
+    );
+  }
+  /**
+   * @param params The `PostulationService.GetPostulationIdLigneParams` containing the following parameters:
+   *
+   * - `ligne`:
+   *
+   * - `id`:
+   *
+   * @return Success
+   */
+  getPostulationIdLigne(params: PostulationService.GetPostulationIdLigneParams): __Observable<PostulationResumeDTOPagedResult> {
+    return this.getPostulationIdLigneResponse(params).pipe(
+      __map(_r => _r.body as PostulationResumeDTOPagedResult)
+    );
+  }
+
+  /**
+   * @param id undefined
+   * @return Success
+   */
+  postPostulationIdResponse(id: number): __Observable<__StrictHttpResponse<PostulationDTO>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+    let req = new HttpRequest<any>(
+      'POST',
+      this.rootUrl + `/Postulation/${id}`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<PostulationDTO>;
+      })
+    );
+  }
+  /**
+   * @param id undefined
+   * @return Success
+   */
+  postPostulationId(id: number): __Observable<PostulationDTO> {
+    return this.postPostulationIdResponse(id).pipe(
+      __map(_r => _r.body as PostulationDTO)
+    );
+  }
 }
 
 module PostulationService {
+
+  /**
+   * Parameters for getPostulationIdLigne
+   */
+  export interface GetPostulationIdLigneParams {
+    ligne: number;
+    id: number;
+  }
 }
 
 export { PostulationService }

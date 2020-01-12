@@ -1,7 +1,9 @@
 /* tslint:disable */
+import { AnnonceDTO } from './annonce-dto';
+import { EtudiantDTO } from './etudiant-dto';
 export interface PostulationDTO {
   id?: number;
   estAccepte?: boolean;
-  annonceId: number;
-  etudiantId: number;
+  annonce?: AnnonceDTO;
+  etudiant?: EtudiantDTO;
 }

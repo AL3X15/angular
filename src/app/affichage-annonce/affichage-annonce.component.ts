@@ -1,8 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { AnnonceResumeDTOPagedResult } from '../api/models/annonce-resume-dtopaged-result';
-import { AnnonceService } from '../api/services';
-import { AnnonceSelectioneeService } from '../service/annonce-selectionee.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit, Input } from '@angular/core';
 import { AnnonceDTO } from '../api/models';
 
 @Component({
@@ -12,20 +8,10 @@ import { AnnonceDTO } from '../api/models';
 })
 export class AffichageAnnonceComponent implements OnInit {
 
-	constructor(private serviceAnnonceSelectionnee : AnnonceSelectioneeService, private serviceAnnonce : AnnonceService, private router : Router){}
+	constructor(){}
 
-	ngOnInit(){
-		this.annonce = this.serviceAnnonceSelectionnee.getAnnonce();
-		console.log(this.annonce)
-	}
+	ngOnInit(){}
 
-	annonce : AnnonceDTO;
-
-	supression(){
-		this.serviceAnnonce.deleteAnnonceId(this.annonce.id).subscribe(
-			() => {},
-			() => {},
-			() => this.router.navigate(["mesAnnonces"]));
-	}
+	@Input() annonce : AnnonceDTO;
 
 }

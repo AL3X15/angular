@@ -29,15 +29,9 @@ export class AffichageProfilComponent implements OnInit {
 
 	modifProfil(){
 		if(this.estAdmin){
-			this.serviceAdmin.getAdministrateur().subscribe(
-				x => this.serviceUser.setAdministrateur(x),
-				() => {},
-				() => this.router.navigate(["administrateurForm"]));
+			this.router.navigate(["administrateurForm"]);
 		}else{
-			this.serviceEnt.getEntreprise().subscribe(
-				x => this.serviceUser.setEntreprise(x),
-				() => {},
-				() => this.router.navigate(["entrepriseForm"]));
+			this.router.navigate(["entrepriseForm"]);
 		}
 	}
 }

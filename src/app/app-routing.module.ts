@@ -4,7 +4,6 @@ import { AcceuilComponent } from './acceuil/acceuil.component';
 import { FormulaireEntrepriseComponent } from './formulaire-entreprise/formulaire-entreprise.component';
 import { FormulaireAnnonceComponent } from './formulaire-annonce/formulaire-annonce.component';
 import { AuthorisationGuard } from './guard/authorisation.guard';
-import { PostulationComponent } from './postulation/postulation.component';
 import { ListeAnnonceComponent } from './liste-annonce/liste-annonce.component';
 import { EntrepriseGuard } from './guard/entreprise.guard';
 import { AdministrateurGuard } from './guard/administrateur.guard';
@@ -18,7 +17,10 @@ import { EntrepriseSignalementResolver } from './resolver/EntrepriseSignalementR
 import { EtudiantSignalementResolver } from './resolver/EtudiantSignalementResolver';
 import { TagsResolver } from './resolver/tagsResolver';
 import { AnnonceResolver } from './resolver/AnnonceResolver';
-import { AffichageAnnonceComponent } from './affichage-annonce/affichage-annonce.component';
+import { ListePostulationComponent } from './liste-postulation/liste-postulation.component';
+import { PostulationResolver } from './resolver/PostulationResolver';
+import { AffichagePostulationComponent } from './affichage-postulation/affichage-postulation.component';
+import { DetailAnnonceComponent } from './detail-annonce/detail-annonce.component';
 
 
 
@@ -36,12 +38,13 @@ const routes: Routes = [
 		resolve: { tags : TagsResolver}
 	},{
 		path: "annonce",
-		component: AffichageAnnonceComponent,
+		component: DetailAnnonceComponent,
 		canActivate: [AuthorisationGuard,EntrepriseGuard],
 	},{		
-		path: "postulation",
-		component: PostulationComponent,
+		path: "postulations",
+		component: ListePostulationComponent,
 		canActivate: [AuthorisationGuard,EntrepriseGuard],
+		resolve : { page : PostulationResolver }
 	},{
 		path: "signalement/entreprise",
 		component: SignalementEntrepriseComponent,
@@ -61,6 +64,10 @@ const routes: Routes = [
 		component: ListeAnnonceComponent,
 		canActivate: [AuthorisationGuard,EntrepriseGuard],
 		resolve: { page : AnnonceResolver }
+	},{
+		path: "postulation",
+		component: AffichagePostulationComponent,
+		canActivate: [AuthorisationGuard,EntrepriseGuard],
 	},{
 		path: "profil",
 		component: AffichageProfilComponent,
@@ -87,8 +94,8 @@ const routes: Routes = [
 		EntrepriseSignalementResolver,
 		EtudiantSignalementResolver,
 		AnnonceResolver,
-		TagsResolver
-
+		TagsResolver,
+		PostulationResolver
 	]
 })
 

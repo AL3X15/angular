@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AnnonceDTO } from '../api/models';
+import { AnnonceDTO, PostulationDTO } from '../api/models';
 
 @Injectable({
 	providedIn: 'root'
@@ -9,6 +9,7 @@ export class AnnonceSelectioneeService {
 	constructor() { }
 
 	private annonce : AnnonceDTO;
+	private postulation : PostulationDTO;
 
 	setAnnonce(annonce : AnnonceDTO){
 		this.annonce = annonce;
@@ -16,5 +17,13 @@ export class AnnonceSelectioneeService {
 
 	getAnnonce(){
 		return this.annonce;
+	}
+
+	setPostulation(postulation : PostulationDTO){
+		this.postulation = postulation;
+	}
+
+	getPostulation(){
+		return this.postulation;
 	}
 }
