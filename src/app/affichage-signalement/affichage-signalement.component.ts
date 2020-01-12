@@ -22,7 +22,7 @@ export class AffichageSignalementComponent implements OnInit {
 	etudiant : EtudiantDTO;
 
 	reset(){
-		if(this.entreprise !== undefined)
+		if(this.entreprise != undefined)
 			this.serviceEnt.putEntrepriseId(this.entreprise.user.id).subscribe(
 				() => {},
 				() => {},
@@ -35,7 +35,7 @@ export class AffichageSignalementComponent implements OnInit {
 	}
 
 	supprimer(){
-		if(this.entreprise !== undefined)
+		if(this.entreprise != undefined)
 			this.serviceEnt.deleteEntrepriseId(this.entreprise.id).subscribe(
 				() => {},
 				() => {},

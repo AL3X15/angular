@@ -8,7 +8,7 @@ export interface EtudiantDTO {
   sexe: string;
   dateNaissance: string;
   registreNational: string;
-  expirationBadge: string;
+  expirationBadge?: string;
   adresse: AdresseDTO;
   tags: Array<TagDTO>;
   user: UserDTO;

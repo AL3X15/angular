@@ -25,6 +25,7 @@ export class ApiInterceptor implements HttpInterceptor {
         // Also handle errors globally
         return next.handle(req).pipe(
             tap(x => x, err => {
+                console.log(err);
                 // Handle this err
                 switch (err.status) {
                     case 400:
@@ -44,6 +45,12 @@ export class ApiInterceptor implements HttpInterceptor {
                         break;
                     case 500:
                         alert("erreur server");
+                        break;
+                    case 502:
+                        alert("bad gateway");
+                        break;
+                    case 503:
+                        alert("service unavailable");
                         break;
                     default:
                         alert("erreur inconue");

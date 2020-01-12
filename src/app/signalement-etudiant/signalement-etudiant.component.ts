@@ -37,7 +37,7 @@ export class SignalementEtudiantComponent implements OnInit {
 	}
 
 	details(id : string){
-		this.service.detailEntreprise(id);
+		this.service.detailEtudiant(id);
 	}
 
 	page : EtudiantResumeDTOPagedResult;

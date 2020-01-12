@@ -17,7 +17,7 @@ export class UtilisateurService {
 	private entreprise : EntrepriseDTO;
 	estAdmin = new BehaviorSubject<boolean>(false);
 	estEnt = new BehaviorSubject<boolean>(false);
-	estPremuim = new BehaviorSubject<boolean>(false);
+	estPremuium = new BehaviorSubject<boolean>(false);
 	private token : JwtToken;
 
 	estAuthentifie() : boolean{
@@ -37,14 +37,17 @@ export class UtilisateurService {
 	}
 
 	setToken(token : JwtToken){
-		if(token.estEtudiant){
-			//TODO interdire les étudiants
+		let tokenDecode = atob(token.access_token.split('.')[1]);
+		let role = JSON.parse(tokenDecode)["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+		if(role == "etudiant"){
+			alert("Interdit aux étudiants")
 		}else{
-			//TODO récupérer les roles du token
 			this.token = token;
-			this.estAdmin.next(token.estAdministrateur);
-			this.estEnt.next(token.estEntreprise);
-			this.estPremuim.next(token.estPremuim);
+			if(role == "entreprise")
+				this.estEnt.next(true);
+			if(role == "administrateur")
+				this.estAdmin.next(true);
+			this.estPremuium.next(token.estPremuim);
 		}
 	}
 
@@ -68,16 +71,13 @@ export class UtilisateurService {
 		this.resetToken();
 		this.estAdmin.next(false);
 		this.estEnt.next(false);
-		this.estPremuim.next(false);
+		this.estPremuium.next(false);
 	}
 
 	resetToken(){
 		this.token = {
 			access_token : null,
 			expires_in : null,
-			estEtudiant : null,
-			estAdministrateur : null,
-			estEntreprise : null,
 			estPremuim : null,
 		};
 	}

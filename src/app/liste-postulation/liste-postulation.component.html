@@ -12,7 +12,7 @@
 			<td *ngIf="postulation.estAccepte">Acceptée</td>
 			<td *ngIf="!postulation.estAccepte">Pas encore traitée</td>
 			<td>{{postulation.etudiant.user.nom}} {{postulation.etudiant.prenom}}</td>
-			<td><a (click)="details(postulation.id)">Details</a></td>
+			<td><a (click)="details(postulation.id)" class="link">Details</a></td>
 		</tr>
 	</table>
 </div>

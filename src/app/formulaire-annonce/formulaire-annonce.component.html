@@ -63,8 +63,6 @@
 		</div>
 	</div>
 
-
-
 	<label>Langues : </label>
 	<select formControlName="langue">
 		<option *ngFor="let langue of langues.tags" [value]="langue.nom">
@@ -79,7 +77,15 @@
 			{{secteur.nom}}
 		</option>
 	</select>
+
 	<br><br>
+	
+	<div *ngIf="estPremuium">
+		<input type="checkbox" formControlName="estUrgent">
+		<label> Est une urgence </label>
+	</div>
+
+	<br>
 
 	<button type="submit" [disabled]="!annonceForm.valid">Submit</button>
 </form>
