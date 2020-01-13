@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UtilisateurService } from './service/utilisateur.service';
 
 @Component({
@@ -6,7 +6,7 @@ import { UtilisateurService } from './service/utilisateur.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit, OnDestroy{
 	title = 'Jober';
 	constructor(private userService : UtilisateurService){
 	}
@@ -17,5 +17,10 @@ export class AppComponent implements OnInit{
 	ngOnInit() {
 		this.userService.estAdmin.subscribe(est => this.estAdmin = est);
 		this.userService.estEnt.subscribe(est => this.estEntreprise = est);
+	}
+
+	ngOnDestroy(){
+		this.userService.estAdmin.unsubscribe();
+		this.userService.estEnt.unsubscribe();
 	}
 }

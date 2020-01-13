@@ -9,21 +9,17 @@ import { Router } from '@angular/router';
   templateUrl: './acceuil.component.html',
   styleUrls: ['./acceuil.component.css']
 })
-export class AcceuilComponent implements OnInit, OnDestroy {
+export class AcceuilComponent implements OnInit {
 	
-	constructor(private formBuilder: FormBuilder, private jwt : JwtService, private ent : EntrepriseService, private userService : UtilisateurService, private router: Router) { }
+	constructor(private formBuilder: FormBuilder, private jwt : JwtService, private userService : UtilisateurService, private router: Router) { }
 	
 	ngOnInit() {
 		this.loginForm = this.formBuilder.group({
 			UserName : ['', Validators.compose([Validators.required, Validators.pattern(".+@.+\..+")])],
 			Password  : ['', Validators.required],
 		}); 
-		this.userService.estAdmin.subscribe(est => this.estAdmin = est);
-		this.userService.estEnt.subscribe(est => this.estEntreprise = est);
 	}
 
-	estAdmin : boolean;
-	estEntreprise : boolean;
 	loginForm: FormGroup;
 
 	onSubmit(){
@@ -32,15 +28,10 @@ export class AcceuilComponent implements OnInit, OnDestroy {
 			x => this.userService.setToken(x),
 			() => {},
 			() => {
-				if(this.estAdmin)
+				if(this.userService.estAdministrateur())
 					this.router.navigate(['signalement/etudiant']);
-				else if(this.estEntreprise)
+				else if(this.userService.estEntreprise())
 					this.router.navigate(['postulations']);
 			});
-	}
-
-	ngOnDestroy(){
-		this.userService.estAdmin.unsubscribe();
-		this.userService.estEnt.unsubscribe();
 	}
 }

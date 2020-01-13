@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { AnnonceService } from '../api/services';
 import { AnnonceDTO, GroupeTagDTO, TagDTO } from '../api/models';
@@ -13,7 +13,7 @@ import { UtilisateurService } from '../service/utilisateur.service';
   templateUrl: './formulaire-annonce.component.html',
   styleUrls: ['./formulaire-annonce.component.css']
 })
-export class FormulaireAnnonceComponent implements OnInit {
+export class FormulaireAnnonceComponent implements OnInit, OnDestroy {
 
 	constructor(private formBuilder: FormBuilder, private serviceAnnonce : AnnonceService, private serviceTag : TagsService, private annonceSelectionnee : AnnonceSelectioneeService, private route : ActivatedRoute, private router : Router, private serviceUser : UtilisateurService) {}
 
@@ -75,6 +75,10 @@ export class FormulaireAnnonceComponent implements OnInit {
 			secteur : ['', Validators.required],
 			estUrgent : ['']
 		}); 
+	}
+
+	ngOnDestroy(){
+		this.serviceUser.estPremuium.unsubscribe();
 	}
 
 }
