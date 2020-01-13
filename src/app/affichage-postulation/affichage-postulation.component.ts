@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AnnonceSelectioneeService } from '../service/annonce-selectionee.service';
 import { PostulationDTO } from '../api/models';
 import { PostulationService } from '../api/services';

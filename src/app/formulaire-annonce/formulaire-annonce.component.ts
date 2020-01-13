@@ -6,6 +6,7 @@ import { TagsService } from '../service/tags.service';
 import { AnnonceSelectioneeService } from '../service/annonce-selectionee.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UtilisateurService } from '../service/utilisateur.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -18,15 +19,16 @@ export class FormulaireAnnonceComponent implements OnInit, OnDestroy {
 	constructor(private formBuilder: FormBuilder, private serviceAnnonce : AnnonceService, private serviceTag : TagsService, private annonceSelectionnee : AnnonceSelectioneeService, private route : ActivatedRoute, private router : Router, private serviceUser : UtilisateurService) {}
 
 	ngOnInit(){
-		this.serviceUser.estPremuium.subscribe(x => this.estPremuium = x);
+		this.subscription = this.serviceUser.estPremuium.subscribe(x => this.estPremuium = x);
 		this.formulaireCreation();
-		if(this.serviceTag.getTags() === undefined)
+		if(this.serviceTag.getTags() == undefined)
 			this.serviceTag.setTags(this.route.snapshot.data.tags);
 		this.langues = this.serviceTag.getTags().find(x => x.nom == "langues");
 		this.secteurs = this.serviceTag.getTags().find(x => x.nom == "secteurs");
 		this.urgent = this.serviceTag.getTags().find(x => x.nom == "urgent");
 	}
 	
+	subscription: Subscription;
 	langues : GroupeTagDTO;
 	secteurs : GroupeTagDTO;
 	urgent : GroupeTagDTO;
@@ -78,7 +80,7 @@ export class FormulaireAnnonceComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnDestroy(){
-		this.serviceUser.estPremuium.unsubscribe();
+		this.subscription.unsubscribe();
 	}
 
 }

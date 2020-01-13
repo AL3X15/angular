@@ -1,6 +1,6 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { JwtService, EntrepriseService } from '../api/services';
+import { JwtService } from '../api/services';
 import { UtilisateurService } from '../service/utilisateur.service';
 import { Router } from '@angular/router';
 

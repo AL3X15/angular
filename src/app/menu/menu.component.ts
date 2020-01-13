@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UtilisateurService } from '../service/utilisateur.service';
 import { Router } from '@angular/router';
 import { EntrepriseService, AdministrateurService } from '../api/services';
+import { Subscription } from 'rxjs';
 
 @Component({
 	selector: 'app-menu',
@@ -10,15 +11,16 @@ import { EntrepriseService, AdministrateurService } from '../api/services';
 })
 export class MenuComponent implements OnInit, OnDestroy {
 
-	constructor(private userService : UtilisateurService, private router: Router, private serviceEnt : EntrepriseService, private serviceAdmin : AdministrateurService){
-	}
+	constructor(private userService : UtilisateurService, private router: Router, private serviceEnt : EntrepriseService, private serviceAdmin : AdministrateurService){}
 	
+	subscriptionAdmin: Subscription;
+	subscriptionEnt: Subscription;
 	estAdmin : boolean;
 	estEntreprise : boolean;
 	
 	ngOnInit() {
-		this.userService.estAdmin.subscribe(est => this.estAdmin = est);
-		this.userService.estEnt.subscribe(est => this.estEntreprise = est);
+		this.subscriptionAdmin = this.userService.estAdmin.subscribe(est => this.estAdmin = est);
+		this.subscriptionEnt = this.userService.estEnt.subscribe(est => this.estEntreprise = est);
 	}
 
 	deconnexion(){
@@ -46,8 +48,8 @@ export class MenuComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnDestroy(){
-		this.userService.estEnt.unsubscribe();
-		this.userService.estAdmin.unsubscribe();
+		this.subscriptionEnt.unsubscribe();
+		this.subscriptionAdmin.unsubscribe();
 	}
 
 }
