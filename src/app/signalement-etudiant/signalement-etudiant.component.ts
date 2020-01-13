@@ -21,19 +21,23 @@ export class SignalementEtudiantComponent implements OnInit {
 	}
 
 	suivant(){
+		document.getElementById("b2")["disabled"]  = true;
 		if(this.page.pageIndex+1 < this.nbPages)
 			this.serviceEtu.getEtudiantSignalementLigne(this.page.pageIndex+1).subscribe(
 				x => this.page = x,
 				() => {},
 				() => this.nbPages = Math.ceil(this.page.totalCount  /  this.page.pageSize));
+		document.getElementById("b2")["disabled"]  = false;
 	}
 
 	precedent(){
+		document.getElementById("b1")["disabled"]  = true;
 		if(this.page.pageIndex-1 > 0)
 			this.serviceEtu.getEtudiantSignalementLigne(this.page.pageIndex-1).subscribe(
 				x => this.page = x,
 				() => {},
 				() => this.nbPages = Math.ceil(this.page.totalCount  /  this.page.pageSize));
+		document.getElementById("b1")["disabled"]  = false;
 	}
 
 	details(id : string){

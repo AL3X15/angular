@@ -15,4 +15,7 @@
 			<td><a (click)="details(postulation.id)" class="link">Details</a></td>
 		</tr>
 	</table>
+	<button *ngIf="page.pageIndex-1 > 0" (click)="precedent()" id="b1">Precedent</button>
+	<p>{{page.pageIndex}}/{{nbPages}}</p>
+	<button *ngIf="page.pageIndex+1 <= nbPages" (click)="suivant()" id="b2">Suivant</button>
 </div>

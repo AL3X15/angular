@@ -13,8 +13,8 @@
 		</tr>
 	</table>
 	<footer>
-		<button *ngIf="page.pageIndex-1 > 0" (click)="precedent()">Precedent</button>
+		<button *ngIf="page.pageIndex-1 > 0" (click)="precedent()" id="b1">Precedent</button>
 		<p>{{page.pageIndex}}/{{nbPages}}</p>
-		<button *ngIf="page.pageIndex+1 <= nbPages" (click)="suivant()">Suivant</button>
+		<button *ngIf="page.pageIndex+1 <= nbPages" (click)="suivant()" id="b2">Suivant</button>
 	</footer>
 </div>

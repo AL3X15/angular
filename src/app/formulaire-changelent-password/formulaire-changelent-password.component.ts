@@ -26,6 +26,7 @@ export class FormulaireChangelentPasswordComponent implements OnInit {
 	password : PasswordDTO;
 
 	onSubmit(){
+		document.getElementById("b")["disabled"]  = true;
 		this.password = this.passwordForm.value;
 
 		if(this.password.password === this.password.confirmationPassword)
@@ -38,5 +39,6 @@ export class FormulaireChangelentPasswordComponent implements OnInit {
 				});
 		else		
 			alert("il faut confirmer le mot de passe");	
+			document.getElementById("b")["disabled"]  = false;
 	}
 }

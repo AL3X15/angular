@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { EtudiantDTO, EntrepriseDTO } from '../api/models';
+import { EtudiantDTO, EntrepriseDTO, EtudiantResumeDTO } from '../api/models';
 import { Router } from '@angular/router';
 import { EtudiantService, EntrepriseService } from '../api/services';
 
@@ -31,11 +31,11 @@ export class SignalementService {
 		)
 	}
 
-	getEtudiant(){
+	getEtudiant() : EtudiantDTO{
 		return this.etudiant;
 	}
 
-	getEntreprise(){
+	getEntreprise() : EntrepriseDTO{
 		return this.entreprise;
 	}
 }

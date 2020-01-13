@@ -28,6 +28,7 @@ export class FormulaireEntrepriseComponent implements OnInit {
 	entreprise : EntrepriseDTO;
 	
 	onSubmit(){
+		document.getElementById("b")["disabled"]  = true;
 		let entrepriseNouv : EntrepriseDTO = this.entrepriseForm.value;
 		
 		if(this.entreprise === undefined){
@@ -50,6 +51,7 @@ export class FormulaireEntrepriseComponent implements OnInit {
 				() => this.router.navigate(['acceuil'])
 			);
 		}
+		document.getElementById("b")["disabled"]  = false;
 	}
 
 	formulaireCreation(){

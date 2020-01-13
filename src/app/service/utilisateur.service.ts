@@ -51,11 +51,11 @@ export class UtilisateurService {
 		}
 	}
 
-	getEntreprise(){
+	getEntreprise() : EntrepriseDTO{
 		return this.entreprise;
 	}
 
-	getAdministrateur(){
+	getAdministrateur() : AdministrateurDTO{
 		return this.admin;
 	}
 

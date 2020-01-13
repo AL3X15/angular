@@ -26,6 +26,7 @@ export class FormulaireAdministrateurComponent implements OnInit {
 	administrateur : AdministrateurDTO;
 
 	onSubmit(){
+		document.getElementById("b")["disabled"]  = true;
 		let adminNouv : AdministrateurDTO = this.adminForm.value;
 		
 		if(this.administrateur === undefined){
@@ -47,6 +48,7 @@ export class FormulaireAdministrateurComponent implements OnInit {
 				() => this.router.navigate(['signalement/etudiant'])
 			);
 		}
+		document.getElementById("b")["disabled"]  = false;
 	}
 	
 	formulaireCreation(){

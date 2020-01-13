@@ -22,6 +22,7 @@ export class AffichageSignalementComponent implements OnInit {
 	etudiant : EtudiantDTO;
 
 	reset(){
+		document.getElementById("b1")["disabled"]  = true;
 		if(this.entreprise != undefined)
 			this.serviceEnt.putEntrepriseId(this.entreprise.user.id).subscribe(
 				() => {},
@@ -32,9 +33,11 @@ export class AffichageSignalementComponent implements OnInit {
 				() => {},
 				() => {},
 				() => this.router.navigate(["signalement/etudiant"]));
+		document.getElementById("b1")["disabled"]  = true;
 	}
 
 	supprimer(){
+		document.getElementById("b2")["disabled"]  = true;
 		if(this.entreprise != undefined)
 			this.serviceEnt.deleteEntrepriseId(this.entreprise.id).subscribe(
 				() => {},
@@ -45,5 +48,6 @@ export class AffichageSignalementComponent implements OnInit {
 				() => {},
 				() => {},
 				() => this.router.navigate(["signalement/etudiant"]));
+		document.getElementById("b2")["disabled"]  = true;
 	}
 }

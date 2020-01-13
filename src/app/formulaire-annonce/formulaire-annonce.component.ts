@@ -34,6 +34,7 @@ export class FormulaireAnnonceComponent implements OnInit {
 	estPremuium : boolean;
 
 	onSubmit(){
+		document.getElementById("b")["disabled"]  = true;
 		let annonceNouv : AnnonceDTO = this.annonceForm.value;
 		if(annonceNouv.paie < 0)
 			alert("la paie ne peux pas être négative");
@@ -52,6 +53,7 @@ export class FormulaireAnnonceComponent implements OnInit {
 				() => {},
 				() => this.router.navigate(["postulations"]));
 		}
+		document.getElementById("b")["disabled"]  = false;
 	}
 
 

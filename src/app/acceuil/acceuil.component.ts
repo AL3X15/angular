@@ -27,6 +27,7 @@ export class AcceuilComponent implements OnInit {
 	loginForm: FormGroup;
 
 	onSubmit(){
+		document.getElementById("b")["disabled"]  = true;
 		this.jwt.postJwt(this.loginForm.value).subscribe(
 			x => this.userService.setToken(x),
 			() => {},

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AnnonceService } from '../api/services';
+import { AnnonceService, FaqService } from '../api/services';
 import { AnnonceSelectioneeService } from '../service/annonce-selectionee.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AnnonceResumeDTOPagedResult } from '../api/models/annonce-resume-dtopaged-result';
@@ -21,19 +21,23 @@ export class ListeAnnonceComponent implements OnInit {
 	}
 
 	suivant(){
+		document.getElementById("b2")["disabled"]  = true;
 		if(this.page.pageIndex+1 <= this.nbPages)
 			this.serviceAnnonce.getAnnonceMesAnnoncesLigne(this.page.pageIndex+1).subscribe(
 				x => this.page = x,
 				() => {},
 				() => this.nbPages = Math.ceil(this.page.totalCount  /  this.page.pageSize));
+		document.getElementById("b2")["disabled"]  = false;
 	}
 
 	precedent(){
+		document.getElementById("b1")["disabled"]  = true;
 		if(this.page.pageIndex-1 > 0)
 			this.serviceAnnonce.getAnnonceMesAnnoncesLigne(this.page.pageIndex-1).subscribe(
 				x => this.page = x,
 				() => {},
 				() => this.nbPages = Math.ceil(this.page.totalCount  /  this.page.pageSize));
+		document.getElementById("b1")["disabled"]  = false;
 	}
 
 	details(id : number){

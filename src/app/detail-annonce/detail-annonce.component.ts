@@ -20,6 +20,7 @@ export class DetailAnnonceComponent implements OnInit {
 	annonce : AnnonceDTO;
 
 	supression(){
+		document.getElementById("b2")["disabled"]  = true;
 		this.serviceAnnonce.deleteAnnonceId(this.annonce.id).subscribe(
 			() => {},
 			() => {},
@@ -27,6 +28,7 @@ export class DetailAnnonceComponent implements OnInit {
 	}
 
 	postulations(){
+		document.getElementById("b1")["disabled"]  = true;
 		this.router.navigate(["postulations"]);
 	}
 

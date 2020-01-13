@@ -22,6 +22,7 @@ export class ListePostulationComponent implements OnInit {
 	}
 
 	suivant(){
+		document.getElementById("b")["disabled"]  = true;
 		if(this.page.pageIndex+1 <= this.nbPages){
 			if(this.annonce != null)
 				this.servicePostulation.getPostulationIdLigne({"id" : this.annonce.id, "ligne" : this.page.pageIndex+1}).subscribe(
@@ -34,9 +35,11 @@ export class ListePostulationComponent implements OnInit {
 				() => {},
 				() => this.nbPages = Math.ceil(this.page.totalCount  /  this.page.pageSize));	
 		}
+		document.getElementById("b")["disabled"]  = false;
 	}
 
 	precedent(){
+		document.getElementById("b")["disabled"]  = true;
 		if(this.page.pageIndex-1 > 0){
 			if(this.annonce != null)
 				this.servicePostulation.getPostulationIdLigne({"id" : this.annonce.id, "ligne" : this.page.pageIndex-1}).subscribe(
@@ -49,6 +52,7 @@ export class ListePostulationComponent implements OnInit {
 				() => {},
 				() => this.nbPages = Math.ceil(this.page.totalCount  /  this.page.pageSize));
 		}
+		document.getElementById("b")["disabled"]  = false;
 	}
 
 	details(id : number){

@@ -15,7 +15,7 @@ export class AnnonceSelectioneeService {
 		this.annonce = annonce;
 	}
 
-	getAnnonce(){
+	getAnnonce() : AnnonceDTO{
 		return this.annonce;
 	}
 
@@ -23,7 +23,7 @@ export class AnnonceSelectioneeService {
 		this.postulation = postulation;
 	}
 
-	getPostulation(){
+	getPostulation() : PostulationDTO{
 		return this.postulation;
 	}
 }
