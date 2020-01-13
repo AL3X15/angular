@@ -1,5 +1,12 @@
 <form [formGroup]="adminForm" (ngSubmit)="onSubmit()">
   
+	<label>Prenom : </label>
+	<input type="text" formControlName="prenom">
+	<div style="color : red;" *ngIf="adminForm.get('prenom').hasError('required') && adminForm.get('prenom').touched">
+		il faut prenom
+	</div>
+	<br><br>
+
 	<div formGroupName="user">
 		<label>Nom : </label>
 		<input type="text" formControlName="nom">
@@ -7,16 +14,7 @@
 			il faut un nom
 		</div>
 		<br><br>
-    </div>
 
-    <label>Prenom : </label>
-	<input type="text" formControlName="prenom">
-	<div style="color : red;" *ngIf="adminForm.get('prenom').hasError('required') && adminForm.get('prenom').touched">
-		il faut prenom
-	</div>
-	<br><br>
-        
-    <div formGroupName="user">
 		<label>Numero De telephone : </label>
 		<input type="text" formControlName="phoneNumber">
 		<div style="color : red;" *ngIf="adminForm.get('user.phoneNumber').hasError('required') && adminForm.get('user.phoneNumber').touched">
@@ -36,22 +34,23 @@
 			adresse mail non valide
 		</div>
 		<br><br>
-	</div>
+	
 
-	<div *ngIf="administrateur === undefined" formGroupName="user">
-		<label>Mot de passe : </label>
-		<input type="password" formControlName="password">
-		<div style="color : red;" *ngIf="adminForm.get('user.password').hasError('required') && adminForm.get('user.password').touched">
-			il faut un mot de passe
-		</div>
-		<br><br>
+		<div *ngIf="administrateur == null">
+			<label>Mot de passe : </label>
+			<input type="password" formControlName="password">
+			<div style="color : red;" *ngIf="adminForm.get('user.password').hasError('required') && adminForm.get('user.password').touched">
+				il faut un mot de passe
+			</div>
+			<br><br>
 
-		<label>Confirmation de mot de passe : </label>
-		<input type="password" formControlName="confirmationPassword">
-		<div style="color : red;" *ngIf="adminForm.get('user.confirmationPassword').hasError('required') && adminForm.get('user.confirmationPassword').touched">
-			il faut confirmer le mot de passe 
+			<label>Confirmation de mot de passe : </label>
+			<input type="password" formControlName="confirmationPassword">
+			<div style="color : red;" *ngIf="adminForm.get('user.confirmationPassword').hasError('required') && adminForm.get('user.confirmationPassword').touched">
+				il faut confirmer le mot de passe 
+			</div>
+			<br><br>
 		</div>
-		<br><br>
 	</div>
 
 

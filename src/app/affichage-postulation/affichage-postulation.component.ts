@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AnnonceSelectioneeService } from '../service/annonce-selectionee.service';
 import { PostulationDTO } from '../api/models';
 import { PostulationService } from '../api/services';
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 	templateUrl: './affichage-postulation.component.html',
 	styleUrls: ['./affichage-postulation.component.css']
 })
-export class AffichagePostulationComponent implements OnInit {
+export class AffichagePostulationComponent implements OnInit, OnDestroy {
 
 	constructor(private service : AnnonceSelectioneeService, private servicePostulation : PostulationService, private router : Router) {}
 
@@ -19,7 +19,7 @@ export class AffichagePostulationComponent implements OnInit {
 
 	postulation : PostulationDTO;
 
-	changerEtat(){
+	accepter(){
 		this.servicePostulation.putPostulationId(this.postulation.id).subscribe(
 			() => {},
 			() => {},
@@ -33,4 +33,7 @@ export class AffichagePostulationComponent implements OnInit {
 			() => this.router.navigate(["postulations"]));
 	}
 
+	ngOnDestroy(){
+		this.service.setAnnonce(null);
+	}
 }

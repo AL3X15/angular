@@ -33,5 +33,6 @@ export class AcceuilComponent implements OnInit {
 				else if(this.userService.estEntreprise())
 					this.router.navigate(['postulations']);
 			});
+		document.getElementById("b")["disabled"]  = false;
 	}
 }

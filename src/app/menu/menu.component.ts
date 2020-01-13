@@ -25,7 +25,6 @@ export class MenuComponent implements OnInit, OnDestroy {
 
 	deconnexion(){
 		this.userService.deconnexion();
-		this.router.navigate(['acceuil']);
 	}
 
 	voirProfil(){

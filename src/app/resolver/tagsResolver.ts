@@ -10,7 +10,7 @@ export class TagsResolver implements Resolve<Array<GroupeTagDTO>>{
 
 	constructor(private service : TagService, private tagsService : TagsService){}
 
-	resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any>|Promise<any>|any {
+	resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Array<GroupeTagDTO>> {
 		if(this.tagsService.getTags() === undefined)
 			return this.service.getTag();
 	}

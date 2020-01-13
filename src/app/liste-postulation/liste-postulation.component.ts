@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PostulationResumeDTOPagedResult, AnnonceDTO } from '../api/models';
 import { PostulationService } from '../api/services';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -9,7 +9,7 @@ import { AnnonceSelectioneeService } from '../service/annonce-selectionee.servic
 	templateUrl: './liste-postulation.component.html',
 	styleUrls: ['./liste-postulation.component.css']
 })
-export class ListePostulationComponent implements OnInit {
+export class ListePostulationComponent implements OnInit, OnDestroy {
 
 	constructor(private servicePostulation : PostulationService, private route : ActivatedRoute, private service : AnnonceSelectioneeService, private router : Router) { }
 
@@ -20,6 +20,11 @@ export class ListePostulationComponent implements OnInit {
 			this.nbPages = Math.ceil(this.page.totalCount  /  this.page.pageSize)
 		}
 	}
+
+	page : PostulationResumeDTOPagedResult;
+	nbPages : number;
+	annonce : AnnonceDTO;
+
 
 	suivant(){
 		document.getElementById("b")["disabled"]  = true;
@@ -62,8 +67,8 @@ export class ListePostulationComponent implements OnInit {
 			() => this.router.navigate(["postulation"]));
 	}
 
-	page : PostulationResumeDTOPagedResult;
-	nbPages : number;
-	annonce : AnnonceDTO;
-
+	
+	ngOnDestroy(){
+		this.service.setAnnonce(null);
+	}
 }

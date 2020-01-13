@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { JwtToken } from '../model/JwtToken';
-import { JwtService, EntrepriseService, AdministrateurService } from '../api/services';
+import { AdministrateurService } from '../api/services';
 import { AdministrateurDTO, EntrepriseDTO } from '../api/models';
+import { Router } from '@angular/router';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class UtilisateurService {
 	//TODO onDestroy
-	constructor(private serviceEnt : EntrepriseService, private serviceAdmin : AdministrateurService) {
+	constructor(private router : Router, private serviceAdmin : AdministrateurService) {
 		this.resetToken()
 	}
 
@@ -72,6 +73,7 @@ export class UtilisateurService {
 		this.estAdmin.next(false);
 		this.estEnt.next(false);
 		this.estPremuium.next(false);
+		this.router.navigate(['acceuil']);
 	}
 
 	resetToken(){

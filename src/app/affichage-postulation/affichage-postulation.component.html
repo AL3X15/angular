@@ -6,15 +6,10 @@
 
 <br><br>
 
-<button (click)="changerEtat()">
-    <div *ngIf="!postulation.estAccepte">
-        Accepter
-    </div>
-    <div *ngIf="postulation.estAccepte">
-        Mettre en attente
-    </div>
-</button>
+<div *ngIf="!postulation.estAccepte">
+    <button (click)="accepter()">Accepter</button>
 
-<br><br>
+    <br><br>
 
-<button (click)="refuser()">Refuser</button>
+    <button (click)="refuser()">Refuser</button>
+</div>

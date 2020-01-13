@@ -20,6 +20,7 @@ export class FormulaireAdministrateurComponent implements OnInit {
 			this.formulaireCreation();
 		else
 			this.formulaireModification();
+		console.log(this.administrateur)
 	}
 	
 	adminForm : FormGroup;
@@ -29,12 +30,12 @@ export class FormulaireAdministrateurComponent implements OnInit {
 		document.getElementById("b")["disabled"]  = true;
 		let adminNouv : AdministrateurDTO = this.adminForm.value;
 		
-		if(this.administrateur === undefined){
+		if(this.administrateur == undefined){
 			if(adminNouv.user.password == adminNouv.user.confirmationPassword)
 				this.serviceAdmin.postAdministrateur(adminNouv).subscribe(
 					x => this.serviceUser.setAdministrateur(x),
 					() => {},
-					() => this.router.navigate(['signalement'])
+					() => this.router.navigate(['signalement/etudiant'])
 				);
 			else		
 				alert("il faut confirmer le mot de passe");
@@ -45,7 +46,7 @@ export class FormulaireAdministrateurComponent implements OnInit {
 			this.serviceAdmin.putAdministrateur(adminNouv).subscribe(
 				x => this.serviceUser.setAdministrateur(x),
 				() => {},
-				() => this.router.navigate(['signalement/etudiant'])
+				() => this.serviceUser.deconnexion()
 			);
 		}
 		document.getElementById("b")["disabled"]  = false;
@@ -73,6 +74,10 @@ export class FormulaireAdministrateurComponent implements OnInit {
 				email : [this.administrateur.user.email, Validators.compose([Validators.required, Validators.pattern(".+@.+\..+")])],
 			})
 		}); 
+	}
+
+	deconnexion(){
+
 	}
 
 }

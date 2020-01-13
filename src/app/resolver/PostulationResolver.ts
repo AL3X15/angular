@@ -10,8 +10,8 @@ export class PostulationResolver implements Resolve<PostulationResumeDTOPagedRes
 
 	constructor(private service : PostulationService, private serviceAnnonceSelectionnee : AnnonceSelectioneeService){}
 
-	resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any>|Promise<any>|any {
-        let annonce = this.serviceAnnonceSelectionnee.getAnnonce();
+	resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<PostulationResumeDTOPagedResult> {
+		let annonce = this.serviceAnnonceSelectionnee.getAnnonce();
 		if(annonce != null)
             return this.service.getPostulationIdLigne({"id" : annonce.id,"ligne": 1});
         return this.service.getPostulationPostulationsLigne(1);

@@ -10,7 +10,7 @@ export class EntrepriseSignalementResolver implements Resolve<EntrepriseResumeDT
 
 	constructor(private service : EntrepriseService){}
 
-	resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any>|Promise<any>|any {
+	resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<EntrepriseResumeDTOPagedResult> {
 		return this.service.getEntrepriseSignalementLigne(1);
 	}
 }

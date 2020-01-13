@@ -11,6 +11,6 @@
 		</tr>
 	</table>
 	<button *ngIf="page.pageIndex-1 > 0" (click)="precedent()" id="b1">Precedent</button>
-	<p>{{page.pageIndex}}/{{nbPages}}</p>
+	<label>{{page.pageIndex}}/{{nbPages}}</label>
 	<button *ngIf="page.pageIndex+1 <= nbPages" (click)="suivant()" id="b2">Suivant</button>
 </div>
