@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { JwtService, EntrepriseService } from '../api/services';
 import { UtilisateurService } from '../service/utilisateur.service';
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   templateUrl: './acceuil.component.html',
   styleUrls: ['./acceuil.component.css']
 })
-export class AcceuilComponent implements OnInit {
+export class AcceuilComponent implements OnInit, OnDestroy {
 	
 	constructor(private formBuilder: FormBuilder, private jwt : JwtService, private ent : EntrepriseService, private userService : UtilisateurService, private router: Router) { }
 	
@@ -37,5 +37,10 @@ export class AcceuilComponent implements OnInit {
 				else if(this.estEntreprise)
 					this.router.navigate(['postulations']);
 			});
+	}
+
+	ngOnDestroy(){
+		this.userService.estAdmin.unsubscribe();
+		this.userService.estEnt.unsubscribe();
 	}
 }

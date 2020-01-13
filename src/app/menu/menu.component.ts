@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UtilisateurService } from '../service/utilisateur.service';
 import { Router } from '@angular/router';
 import { EntrepriseService, AdministrateurService } from '../api/services';
@@ -8,7 +8,7 @@ import { EntrepriseService, AdministrateurService } from '../api/services';
 	templateUrl: './menu.component.html',
 	styleUrls: ['./menu.component.css']
 })
-export class MenuComponent implements OnInit {
+export class MenuComponent implements OnInit, OnDestroy {
 
 	constructor(private userService : UtilisateurService, private router: Router, private serviceEnt : EntrepriseService, private serviceAdmin : AdministrateurService){
 	}
@@ -43,6 +43,11 @@ export class MenuComponent implements OnInit {
 	ajoutAdmin(){
 		this.userService.setAdministrateur(null);
 		this.router.navigate(['administrateurForm']);
+	}
+
+	ngOnDestroy(){
+		this.userService.estEnt.unsubscribe();
+		this.userService.estAdmin.unsubscribe();
 	}
 
 }
