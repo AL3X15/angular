@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UtilisateurService } from './service/utilisateur.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -8,11 +9,12 @@ import { UtilisateurService } from './service/utilisateur.service';
 })
 export class AppComponent implements OnInit, OnDestroy{
 	title = 'Jober';
-	constructor(private userService : UtilisateurService){
-	}
+	constructor(private userService : UtilisateurService){}
 
 	estAdmin : boolean;
 	estEntreprise : boolean;
+	subscriptionAdmin: Subscription;
+	subscriptionEnt: Subscription;
 
 	ngOnInit() {
 		this.userService.estAdmin.subscribe(est => this.estAdmin = est);
@@ -20,7 +22,7 @@ export class AppComponent implements OnInit, OnDestroy{
 	}
 
 	ngOnDestroy(){
-		this.userService.estAdmin.unsubscribe();
-		this.userService.estEnt.unsubscribe();
+		this.subscriptionEnt.unsubscribe();
+		this.subscriptionAdmin.unsubscribe();
 	}
 }
