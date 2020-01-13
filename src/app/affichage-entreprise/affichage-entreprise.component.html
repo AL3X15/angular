@@ -1,6 +1,9 @@
 <p>	Nom : {{entreprise.user.nom}}</p>
 <p> Numero Banque Carrefour Ets : {{entreprise.numeroBanqueCarrefourEts}}</p>
-<p> Est premium : {{entreprise.estPremium}}</p>
+<p> Est premium :
+    <span *ngIf="entreprise.estPremium">oui</span>
+    <span *ngIf="!entreprise.estPremium">non</span>
+</p>
 <p> Adresse mail : {{entreprise.user.email}}</p>
 <p> Numero de telephone : {{entreprise.user.phoneNumber}}</p>
 <p> Nom du responsable : {{entreprise.nomResponsable}}</p>

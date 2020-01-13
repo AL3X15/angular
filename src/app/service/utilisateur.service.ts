@@ -47,7 +47,7 @@ export class UtilisateurService {
 				this.estEnt.next(true);
 			if(role == "administrateur")
 				this.estAdmin.next(true);
-			this.estPremuium.next(token.estPremuim);
+			this.estPremuium.next(token.estPremuium);
 		}
 	}
 
@@ -78,7 +78,7 @@ export class UtilisateurService {
 		this.token = {
 			access_token : null,
 			expires_in : null,
-			estPremuim : null,
+			estPremuium : null,
 		};
 	}
 
