@@ -22,7 +22,7 @@
 	<br><br>
 
 	<label>Paye : </label>
-	<input type="number" formControlName="paie">
+	<input type="number" formControlName="paie" min="0">
 	<div style="color : red;" *ngIf="annonceForm.get('paie').hasError('required') && annonceForm.get('paie').touched">
 		il faut une paye
 	</div>

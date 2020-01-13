@@ -14,7 +14,6 @@ export class ApiInterceptor implements HttpInterceptor {
     }
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         // Apply the headers
-        //TODO atacher le token
         if (this.service.estAuthentifie()) {
             req = req.clone({
                 setHeaders: {

@@ -39,10 +39,12 @@ export class FormulaireAdministrateurComponent implements OnInit {
 				alert("il faut confirmer le mot de passe");
 		}
 		else{
+			adminNouv.id = this.administrateur.id;
+			adminNouv.user.id = this.administrateur.user.id;
 			this.serviceAdmin.putAdministrateur(adminNouv).subscribe(
 				x => this.serviceUser.setAdministrateur(x),
 				() => {},
-				() => this.router.navigate(['signalement'])
+				() => this.router.navigate(['signalement/etudiant'])
 			);
 		}
 	}

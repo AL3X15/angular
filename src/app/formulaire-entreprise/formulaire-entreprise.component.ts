@@ -3,7 +3,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { EntrepriseDTO } from '../api/models';
 import { EntrepriseService } from '../api/services';
 import { UtilisateurService } from '../service/utilisateur.service';
-import { EntrepriseModel } from '../model/EntrepriseModel';
 import { Router } from '@angular/router';
 
 @Component({
@@ -29,7 +28,7 @@ export class FormulaireEntrepriseComponent implements OnInit {
 	entreprise : EntrepriseDTO;
 	
 	onSubmit(){
-		let entrepriseNouv : EntrepriseModel = this.entrepriseForm.value;
+		let entrepriseNouv : EntrepriseDTO = this.entrepriseForm.value;
 		
 		if(this.entreprise === undefined){
 			if(entrepriseNouv.user.password == entrepriseNouv.user.confirmationPassword)
@@ -42,6 +41,8 @@ export class FormulaireEntrepriseComponent implements OnInit {
 				alert("il faut confirmer le mot de passe");
 		}
 		else{
+			entrepriseNouv.id = this.entreprise.id;
+			entrepriseNouv.user.id = this.entreprise.user.id;
 			entrepriseNouv.user.nbSignalement = this.entreprise.user.nbSignalement;
 			this.serviceEnt.putEntreprise(entrepriseNouv).subscribe(
 				x => this.serviceUser.setEntreprise(x),

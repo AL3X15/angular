@@ -35,7 +35,11 @@ export class FormulaireAnnonceComponent implements OnInit {
 
 	onSubmit(){
 		let annonceNouv : AnnonceDTO = this.annonceForm.value;
-		if(annonceNouv.dateDebut > annonceNouv.dateFin)
+		if(annonceNouv.paie < 0)
+			alert("la paie ne peux pas être négative");
+		else if(new Date(annonceNouv.dateDebut) < new Date())
+			alert("la date de début doit être supérieure à la date actuelle");
+		else if(annonceNouv.dateDebut > annonceNouv.dateFin)
 			alert("la date de début ne peut pas être supérieure à la date de fin");
 		else{
 			annonceNouv.tags = new Array<TagDTO>();
@@ -43,7 +47,6 @@ export class FormulaireAnnonceComponent implements OnInit {
 			annonceNouv.tags.push(this.secteurs.tags.find(x => x.nom == this.annonceForm.get("secteur").value))
 			if(this.estPremuium && annonceNouv["estUrgent"])
 				annonceNouv.tags.push(this.urgent.tags[0]);
-			console.log(annonceNouv);
 			this.serviceAnnonce.postAnnonce(this.annonceForm.value).subscribe(
 				() => {},
 				() => {},
